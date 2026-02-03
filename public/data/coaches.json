@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Mike Thompson",
+    "specialty": "Basketball",
+    "experience": 15,
+    "athletesManaged": 4,
+    "efficiency": 92,
+    "email": "mike.thompson@sportshub.com",
+    "phone": "0901234567",
+    "certification": "FIBA Level 3",
+    "joinDate": "2015-01-15"
+  },
+  {
+    "id": 2,
+    "name": "Lisa Chen",
+    "specialty": "Swimming",
+    "experience": 12,
+    "athletesManaged": 3,
+    "efficiency": 88,
+    "email": "lisa.chen@sportshub.com",
+    "phone": "0902345678",
+    "certification": "FINA Master Coach",
+    "joinDate": "2018-03-20"
+  },
+  {
+    "id": 3,
+    "name": "Tom Rodriguez",
+    "specialty": "Track & Field",
+    "experience": 18,
+    "athletesManaged": 3,
+    "efficiency": 95,
+    "email": "tom.rodriguez@sportshub.com",
+    "phone": "0903456789",
+    "certification": "IAAF Level 4",
+    "joinDate": "2012-07-10"
+  },
+  {
+    "id": 4,
+    "name": "Anna Martinez",
+    "specialty": "Volleyball",
+    "experience": 10,
+    "athletesManaged": 2,
+    "efficiency": 75,
+    "email": "anna.martinez@sportshub.com",
+    "phone": "0904567890",
+    "certification": "FIVB Level 2",
+    "joinDate": "2020-02-01"
+  },
+  {
+    "id": 5,
+    "name": "John Wilson",
+    "specialty": "Tennis",
+    "experience": 14,
+    "athletesManaged": 2,
+    "efficiency": 91,
+    "email": "john.wilson@sportshub.com",
+    "phone": "0905678901",
+    "certification": "ATP Coach",
+    "joinDate": "2016-05-15"
+  }
+]

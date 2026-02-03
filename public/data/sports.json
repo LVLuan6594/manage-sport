@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "Basketball",
+    "athleteCount": 2,
+    "achievements": "Huy chương vàng tại giải vô địch khu vực",
+    "description": "Bóng rổ là môn thể thao đối kháng có đội hình 5 người",
+    "coach": "Mike Thompson",
+    "competitions": ["Giải vô địch khu vực", "Giải quốc gia"]
+  },
+  {
+    "id": 2,
+    "name": "Swimming",
+    "athleteCount": 2,
+    "achievements": "Lập kỷ lục quốc gia",
+    "description": "Bơi lặn là môn thể thao dưới nước phát triển sức khỏe toàn diện",
+    "coach": "Lisa Chen",
+    "competitions": ["Giải bơi lặn quốc gia", "Đại hội thể thao"]
+  },
+  {
+    "id": 3,
+    "name": "Track & Field",
+    "athleteCount": 2,
+    "achievements": "Huy chương vàng tại giải quốc gia",
+    "description": "Điền kinh là môn thể thao cơ bản bao gồm chạy, nhảy, ném",
+    "coach": "Tom Rodriguez",
+    "competitions": ["Giải điền kinh quốc gia", "Đại hội thể thao"]
+  },
+  {
+    "id": 4,
+    "name": "Volleyball",
+    "athleteCount": 1,
+    "achievements": "Đạt huy chương bạc",
+    "description": "Bóng chuyền là môn thể thao đối kháng dùng tay",
+    "coach": "Anna Martinez",
+    "competitions": ["Giải bóng chuyền quốc gia"]
+  },
+  {
+    "id": 5,
+    "name": "Tennis",
+    "athleteCount": 1,
+    "achievements": "Đạt huy chương vàng đôi nam",
+    "description": "Tennis là môn thể thao vợt trên sân cỏ hoặc sân cứng",
+    "coach": "John Wilson",
+    "competitions": ["Giải tennis quốc gia", "Giải khu vực"]
+  },
+  {
+    "id": 6,
+    "name": "Gymnastics",
+    "athleteCount": 1,
+    "achievements": "Huy chương tại giải khu vực",
+    "description": "Thể dục là môn thể thao tập luyện kỹ năng cân bằng và uốn éo",
+    "coach": "Mike Thompson",
+    "competitions": ["Giải thể dục quốc gia", "Đại hội thể thao"]
+  }
+]
