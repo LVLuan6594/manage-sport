@@ -7,9 +7,11 @@ import { useAuth } from './auth-context'
 
 export default function Home() {
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
+    if (isLoading) return; // Chờ cho đến khi auth được load từ localStorage
+    
     // Ưu tiên kiểm tra đăng nhập khách vãng lai
     if (typeof window !== 'undefined' && localStorage.getItem('guest_phone')) {
       router.push('/xet-tuyen');
@@ -20,7 +22,7 @@ export default function Home() {
     } else {
       router.push('/login');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, isLoading, router]);
 
   return null;
 }

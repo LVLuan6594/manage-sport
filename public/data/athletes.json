@@ -1,137 +1,487 @@
 [
   {
     "id": 1,
-    "name": "John Smith",
-    "sport": "Basketball",
+    "name": "Phạm Văn Linh",
+    "sport": "🥊 Võ thuật",
     "performance": 92,
     "qualified": true,
     "joinMonth": "Tháng 1",
-    "joinYear": 2024,
-    "medals": { "gold": 2, "silver": 1, "bronze": 0 },
-    "injured": false,
-    "potential": true,
-    "age": 24,
-    "height": 190,
-    "coach": "Mike Thompson"
-  },
-  {
-    "id": 2,
-    "name": "Sarah Johnson",
-    "sport": "Swimming",
-    "performance": 88,
-    "qualified": true,
-    "joinMonth": "Tháng 3",
-    "joinYear": 2024,
-    "medals": { "gold": 1, "silver": 2, "bronze": 1 },
+    "joinYear": 2023,
+    "medals": {
+      "gold": 1,
+      "silver": 1,
+      "bronze": 1
+    },
     "injured": false,
     "potential": true,
     "age": 22,
-    "height": 175,
-    "coach": "Lisa Chen"
+    "height": 172,
+    "coach": "Trương Minh Hùng",
+    "joinDate": "2026-02-03"
+  },
+  {
+    "id": 2,
+    "name": "Nguyễn Thanh Nhàn",
+    "sport": "🏊 Bơi lội",
+    "performance": 95,
+    "qualified": true,
+    "joinMonth": "Tháng 3",
+    "joinYear": 2022,
+    "medals": {
+      "gold": 0,
+      "silver": 2,
+      "bronze": 1
+    },
+    "injured": false,
+    "potential": true,
+    "age": 21,
+    "height": 165,
+    "coach": "Phạm Quốc Dũng",
+    "joinDate": "2026-02-03"
   },
   {
     "id": 3,
-    "name": "Mike Davis",
-    "sport": "Track & Field",
-    "performance": 95,
+    "name": "Diệp Ngô Minh Khôi",
+    "sport": "Football",
+    "performance": 97,
     "qualified": true,
-    "joinMonth": "Tháng 2",
-    "joinYear": 2024,
-    "medals": { "gold": 3, "silver": 1, "bronze": 0 },
-    "injured": false,
-    "potential": true,
-    "age": 26,
-    "height": 185,
-    "coach": "Tom Rodriguez"
-  },
-  {
-    "id": 4,
-    "name": "Emma Wilson",
-    "sport": "Volleyball",
-    "performance": 75,
-    "qualified": false,
-    "joinMonth": "Tháng 11",
-    "joinYear": 2023,
-    "medals": { "gold": 0, "silver": 1, "bronze": 1 },
-    "injured": true,
-    "potential": false,
-    "age": 21,
-    "height": 182,
-    "coach": "Anna Martinez"
-  },
-  {
-    "id": 5,
-    "name": "Alex Brown",
-    "sport": "Tennis",
-    "performance": 91,
-    "qualified": true,
-    "joinMonth": "Tháng 1",
-    "joinYear": 2024,
-    "medals": { "gold": 2, "silver": 0, "bronze": 1 },
-    "injured": false,
-    "potential": true,
-    "age": 25,
-    "height": 180,
-    "coach": "John Wilson"
-  },
-  {
-    "id": 6,
-    "name": "Lisa Anderson",
-    "sport": "Gymnastics",
-    "performance": 87,
-    "qualified": true,
-    "joinMonth": "Tháng 12",
-    "joinYear": 2023,
-    "medals": { "gold": 1, "silver": 2, "bronze": 0 },
-    "injured": false,
-    "potential": true,
-    "age": 20,
-    "height": 160,
-    "coach": "Mike Thompson"
-  },
-  {
-    "id": 7,
-    "name": "David Chen",
-    "sport": "Basketball",
-    "performance": 89,
-    "qualified": true,
-    "joinMonth": "Tháng 3",
-    "joinYear": 2024,
-    "medals": { "gold": 1, "silver": 1, "bronze": 1 },
+    "joinMonth": "Tháng 6",
+    "joinYear": 2021,
+    "medals": {
+      "gold": 0,
+      "silver": 1,
+      "bronze": 1
+    },
     "injured": false,
     "potential": true,
     "age": 23,
-    "height": 188,
-    "coach": "Mike Thompson"
+    "height": 170,
+    "coach": "Nguyễn Minh Tâm",
+    "joinDate": "2026-02-03"
+  },
+  {
+    "id": 4,
+    "name": "Phan Thị Thu Hà",
+    "sport": "Karate",
+    "performance": 91,
+    "qualified": true,
+    "joinMonth": "Tháng 2",
+    "joinYear": 2020,
+    "medals": {
+      "gold": 2,
+      "silver": 0,
+      "bronze": 1
+    },
+    "injured": false,
+    "potential": true,
+    "age": 25,
+    "height": 162,
+    "coach": "Trần Văn Long"
+  },
+  {
+    "id": 5,
+    "name": "Nguyễn Quốc Khánh",
+    "sport": "Bóng đá",
+    "performance": 87,
+    "qualified": true,
+    "joinMonth": "Tháng 8",
+    "joinYear": 2019,
+    "medals": {
+      "gold": 1,
+      "silver": 1,
+      "bronze": 0
+    },
+    "injured": true,
+    "potential": true,
+    "age": 24,
+    "height": 175,
+    "coach": "Đỗ Anh Tuấn"
+  },
+  {
+    "id": 6,
+    "name": "Võ Thị Ngọc Mai",
+    "sport": "Bóng chuyền",
+    "performance": 89,
+    "qualified": true,
+    "joinMonth": "Tháng 4",
+    "joinYear": 2021,
+    "medals": {
+      "gold": 0,
+      "silver": 2,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true,
+    "age": 23,
+    "height": 178,
+    "coach": "Lê Văn Hòa"
+  },
+  {
+    "id": 7,
+    "name": "Trần Minh Quân",
+    "sport": "Cầu lông",
+    "performance": 84,
+    "qualified": true,
+    "joinMonth": "Tháng 5",
+    "joinYear": 2022,
+    "medals": {
+      "gold": 1,
+      "silver": 0,
+      "bronze": 1
+    },
+    "injured": false,
+    "potential": false,
+    "age": 20,
+    "height": 168,
+    "coach": "Nguyễn Quốc Việt"
   },
   {
     "id": 8,
-    "name": "Jennifer Lee",
-    "sport": "Swimming",
-    "performance": 86,
-    "qualified": false,
-    "joinMonth": "Tháng 4",
-    "joinYear": 2024,
-    "medals": { "gold": 0, "silver": 0, "bronze": 2 },
-    "injured": true,
-    "potential": false,
-    "age": 21,
-    "height": 172,
-    "coach": "Lisa Chen"
+    "name": "Lê Thị Thanh Trúc",
+    "sport": "Bóng bàn",
+    "performance": 82,
+    "qualified": true,
+    "joinMonth": "Tháng 7",
+    "joinYear": 2023,
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 1
+    },
+    "injured": false,
+    "potential": true,
+    "age": 19,
+    "height": 160,
+    "coach": "Phan Văn Hùng"
   },
   {
     "id": 9,
-    "name": "Robert Taylor",
-    "sport": "Track & Field",
-    "performance": 90,
+    "name": "Nguyễn Văn Phúc",
+    "sport": "Cử tạ",
+    "performance": 93,
     "qualified": true,
-    "joinMonth": "Tháng 5",
-    "joinYear": 2024,
-    "medals": { "gold": 2, "silver": 1, "bronze": 1 },
+    "joinMonth": "Tháng 1",
+    "joinYear": 2018,
+    "medals": {
+      "gold": 3,
+      "silver": 1,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": false,
+    "age": 27,
+    "height": 168,
+    "coach": "Đặng Quốc Bảo"
+  },
+  {
+    "id": 10,
+    "name": "Trương Hoàng Long",
+    "sport": "Vovinam",
+    "performance": 86,
+    "qualified": true,
+    "joinMonth": "Tháng 9",
+    "joinYear": 2020,
+    "medals": {
+      "gold": 1,
+      "silver": 1,
+      "bronze": 1
+    },
     "injured": false,
     "potential": true,
-    "age": 27,
-    "height": 183,
-    "coach": "Tom Rodriguez"
+    "age": 24,
+    "height": 173,
+    "coach": "Ngô Văn Phú"
+  },
+  {
+    "id": 11,
+    "name": "Nguyễn Thị Bích Ngọc",
+    "sport": "Judo",
+    "performance": 88,
+    "qualified": true,
+    "joinMonth": "Tháng 10",
+    "joinYear": 2019,
+    "medals": {
+      "gold": 0,
+      "silver": 2,
+      "bronze": 1
+    },
+    "injured": true,
+    "potential": true,
+    "age": 26,
+    "height": 164,
+    "coach": "Lê Quốc Thắng"
+  },
+  {
+    "id": 12,
+    "name": "Phạm Minh Đức",
+    "sport": "Wushu",
+    "performance": 90,
+    "qualified": true,
+    "joinMonth": "Tháng 6",
+    "joinYear": 2021,
+    "medals": {
+      "gold": 2,
+      "silver": 0,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true,
+    "age": 22,
+    "height": 170,
+    "coach": "Trần Quang Vinh"
+  },
+  {
+    "id": 13,
+    "name": "Nguyễn Thị Ánh Tuyết",
+    "sport": "Thể dục dụng cụ",
+    "performance": 87,
+    "qualified": true,
+    "joinMonth": "Tháng 2",
+    "joinYear": 2020,
+    "medals": {
+      "gold": 0,
+      "silver": 1,
+      "bronze": 1
+    },
+    "injured": false,
+    "potential": true,
+    "age": 21,
+    "height": 158,
+    "coach": "Hoàng Văn Sơn"
+  },
+  {
+    "id": 14,
+    "name": "Lâm Quốc Cường",
+    "sport": "Đua thuyền",
+    "performance": 85,
+    "qualified": true,
+    "joinMonth": "Tháng 11",
+    "joinYear": 2019,
+    "medals": {
+      "gold": 1,
+      "silver": 0,
+      "bronze": 1
+    },
+    "injured": false,
+    "potential": false,
+    "age": 28,
+    "height": 176,
+    "coach": "Nguyễn Văn Hải"
+  },
+  {
+    "id": 15,
+    "name": "Trần Nhật Minh",
+    "sport": "Cờ vua",
+    "performance": 91,
+    "qualified": true,
+    "joinMonth": "Tháng 1",
+    "joinYear": 2022,
+    "medals": {
+      "gold": 2,
+      "silver": 1,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true,
+    "age": 20,
+    "height": 170,
+    "coach": "Đỗ Hoàng Anh"
+  },
+  {
+    "id": 16,
+    "name": "Võ Thành Trung",
+    "sport": "Cờ tướng",
+    "performance": 83,
+    "qualified": true,
+    "joinMonth": "Tháng 8",
+    "joinYear": 2021,
+    "medals": {
+      "gold": 0,
+      "silver": 1,
+      "bronze": 1
+    },
+    "injured": false,
+    "potential": false,
+    "age": 29,
+    "height": 168,
+    "coach": "Nguyễn Văn Khoa"
+  },
+  {
+    "id": 17,
+    "name": "Nguyễn Hoài An",
+    "sport": "Bắn cung",
+    "performance": 84,
+    "qualified": true,
+    "joinMonth": "Tháng 4",
+    "joinYear": 2023,
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 1
+    },
+    "injured": false,
+    "potential": true,
+    "age": 19,
+    "height": 166,
+    "coach": "Phạm Văn Thịnh"
+  },
+  {
+    "id": 18,
+    "name": "Lê Văn Toàn CUSC",
+    "sport": "Bắn súng",
+    "performance": 91,
+    "qualified": true,
+    "joinMonth": "Tháng 5",
+    "joinYear": 2020,
+    "medals": {
+      "gold": 1,
+      "silver": 1,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true,
+    "age": 26,
+    "height": 171,
+    "coach": "Trần Quốc Cường"
+  },
+  {
+    "id": 19,
+    "name": "TEST 1",
+    "sport": "Điền kinh",
+    "performance": 85,
+    "coach": "Nguyễn Văn 1",
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true
+  },
+  {
+    "id": 20,
+    "name": "TEST 2",
+    "sport": "🏊 Bơi lội",
+    "performance": 86,
+    "coach": "Nguyễn Văn 2",
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true
+  },
+  {
+    "id": 21,
+    "name": "TEST 3",
+    "sport": "Bóng chuyền",
+    "performance": 87,
+    "coach": "Nguyễn Văn 3",
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true
+  },
+  {
+    "id": 22,
+    "name": "TEST 4",
+    "sport": "Bóng bàn",
+    "performance": 88,
+    "coach": "Nguyễn Văn 4",
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true
+  },
+  {
+    "id": 23,
+    "name": "TEST 5",
+    "sport": "🏊 Bơi lội",
+    "performance": 89,
+    "coach": "Nguyễn Văn 5",
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true
+  },
+  {
+    "id": 24,
+    "name": "TEST 6",
+    "sport": "Cầu lông",
+    "performance": 90,
+    "coach": "Nguyễn Văn 6",
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true
+  },
+  {
+    "id": 25,
+    "name": "TEST 7",
+    "sport": "Tenis",
+    "performance": 91,
+    "coach": "Nguyễn Văn 7",
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true
+  },
+  {
+    "id": 26,
+    "name": "TEST 8",
+    "sport": "🏊 Bơi lội",
+    "performance": 92,
+    "coach": "Nguyễn Văn 8",
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true
+  },
+  {
+    "id": 27,
+    "name": "TEST 9",
+    "sport": "Cầu lông",
+    "performance": 93,
+    "coach": "Nguyễn Văn 9",
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true
+  },
+  {
+    "id": 28,
+    "name": "TEST 10",
+    "sport": "Tenis",
+    "performance": 94,
+    "coach": "Nguyễn Văn 10",
+    "medals": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "injured": false,
+    "potential": true
   }
 ]

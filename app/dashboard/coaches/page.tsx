@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Plus, Edit2, Trash2, Users } from 'lucide-react'
+import { Plus, Edit2, Trash2, Users, Upload } from 'lucide-react'
 import { CoachDialog } from '@/components/coach-dialog'
 
 interface Coach {
@@ -109,6 +110,146 @@ export default function CoachesPage() {
     }
   }
 
+  const handleImportExcel = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    try {
+      const reader = new FileReader()
+
+      reader.onload = async (e) => {
+        try {
+          const data = e.target?.result
+
+          if (file.name.endsWith('.csv') || file.name.endsWith('.txt')) {
+            const text = data as string
+            const lines = text.split('\n').filter(line => line.trim())
+
+            if (lines.length < 2) {
+              alert('File phải có header và dữ liệu')
+              return
+            }
+
+            const headers = lines[0].split(',').map((h: string) => h.trim())
+            const nameIndex = headers.findIndex(h => h.toLowerCase().includes('tên') || h.toLowerCase().includes('name'))
+            const specialtyIndex = headers.findIndex(h => h.toLowerCase().includes('chuyên') || h.toLowerCase().includes('special') || h.toLowerCase().includes('specialty'))
+            const experienceIndex = headers.findIndex(h => h.toLowerCase().includes('kinh') || h.toLowerCase().includes('experience') || h.toLowerCase().includes('years'))
+            const certificationIndex = headers.findIndex(h => h.toLowerCase().includes('chứng') || h.toLowerCase().includes('cert'))
+            const emailIndex = headers.findIndex(h => h.toLowerCase().includes('email'))
+            const athletesIndex = headers.findIndex(h => h.toLowerCase().includes('vận') || h.toLowerCase().includes('athlete'))
+            const efficiencyIndex = headers.findIndex(h => h.toLowerCase().includes('eff') || h.toLowerCase().includes('efficiency'))
+
+            if (nameIndex === -1) {
+              alert('File phải có cột "Tên"')
+              return
+            }
+
+            const newCoaches: Coach[] = []
+            for (let i = 1; i < lines.length; i++) {
+              const values = lines[i].split(',').map((v: string) => v.trim())
+              const coach: Coach = {
+                name: values[nameIndex] || '',
+                specialty: specialtyIndex !== -1 ? values[specialtyIndex] || '' : '',
+                experience: parseInt(values[experienceIndex] || '0') || 0,
+                certification: certificationIndex !== -1 ? values[certificationIndex] || '' : undefined,
+                email: emailIndex !== -1 ? values[emailIndex] || '' : undefined,
+                athletesManaged: athletesIndex !== -1 ? parseInt(values[athletesIndex] || '0') || 0 : undefined,
+                efficiency: efficiencyIndex !== -1 ? parseFloat(values[efficiencyIndex] || '0') || undefined : undefined,
+              }
+
+              if (coach.name) {
+                newCoaches.push(coach)
+              }
+            }
+
+            let addedCount = 0
+            for (const newCoach of newCoaches) {
+              await handleAddCoach(newCoach)
+              addedCount++
+            }
+
+            alert(`Đã thêm thành công ${addedCount} huấn luyện viên từ CSV`)
+          } else if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+            const script = document.createElement('script')
+            script.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js'
+            document.head.appendChild(script)
+
+            script.onload = async () => {
+              try {
+                const XLSX = (window as any).XLSX
+                const arrayBuffer = data as ArrayBuffer
+                const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' })
+                const sheetName = workbook.SheetNames[0]
+                const worksheet = workbook.Sheets[sheetName]
+                const jsonData = XLSX.utils.sheet_to_json(worksheet)
+
+                const headers = Object.keys(jsonData[0] || {})
+                const nameIndex = headers.findIndex((h: string) => h.toLowerCase().includes('tên') || h.toLowerCase().includes('name'))
+                const specialtyIndex = headers.findIndex((h: string) => h.toLowerCase().includes('chuyên') || h.toLowerCase().includes('special') || h.toLowerCase().includes('specialty'))
+                const experienceIndex = headers.findIndex((h: string) => h.toLowerCase().includes('kinh') || h.toLowerCase().includes('experience') || h.toLowerCase().includes('years'))
+                const certificationIndex = headers.findIndex((h: string) => h.toLowerCase().includes('chứng') || h.toLowerCase().includes('cert'))
+                const emailIndex = headers.findIndex((h: string) => h.toLowerCase().includes('email'))
+                const athletesIndex = headers.findIndex((h: string) => h.toLowerCase().includes('vận') || h.toLowerCase().includes('athlete'))
+                const efficiencyIndex = headers.findIndex((h: string) => h.toLowerCase().includes('eff') || h.toLowerCase().includes('efficiency'))
+
+                if (nameIndex === -1) {
+                  alert('File phải có cột "Tên"')
+                  return
+                }
+
+                let addedCount = 0
+                for (const row of jsonData) {
+                  const values = Object.values(row)
+                  const coach: Coach = {
+                    name: String(values[nameIndex] || '') || '',
+                    specialty: specialtyIndex !== -1 ? String(values[specialtyIndex] || '') : '',
+                    experience: parseInt(String(values[experienceIndex] || 0)) || 0,
+                    certification: certificationIndex !== -1 ? String(values[certificationIndex] || '') : undefined,
+                    email: emailIndex !== -1 ? String(values[emailIndex] || '') : undefined,
+                    athletesManaged: athletesIndex !== -1 ? parseInt(String(values[athletesIndex] || 0)) || undefined : undefined,
+                    efficiency: efficiencyIndex !== -1 ? parseFloat(String(values[efficiencyIndex] || 0)) || undefined : undefined,
+                  }
+
+                  if (coach.name) {
+                    await handleAddCoach(coach)
+                    addedCount++
+                  }
+                }
+
+                alert(`Đã thêm thành công ${addedCount} huấn luyện viên từ Excel`)
+              } catch (err) {
+                console.error('Error parsing Excel:', err)
+                alert('Lỗi khi xử lý file Excel')
+              } finally {
+                document.head.removeChild(script)
+              }
+            }
+
+            script.onerror = () => {
+              alert('Lỗi khi tải thư viện Excel. Vui lòng sử dụng CSV.')
+            }
+          } else {
+            alert('Định dạng file không hỗ trợ. Vui lòng sử dụng CSV hoặc XLSX.')
+          }
+
+          event.target.value = ''
+        } catch (err) {
+          console.error('Error processing file:', err)
+          alert('Lỗi khi xử lý file.')
+        }
+      }
+
+      if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+        reader.readAsArrayBuffer(file)
+      } else {
+        reader.readAsText(file)
+      }
+    } catch (error) {
+      console.error('Error importing file:', error)
+      alert('Lỗi khi import file')
+    }
+  }
+
   const handleDialogSave = (coach: Coach) => {
     if (editingCoach) {
       handleEditCoach(coach)
@@ -144,13 +285,28 @@ export default function CoachesPage() {
           <h1 className="text-4xl font-bold text-blue-900 mb-2">Huấn Luyện Viên</h1>
           <p className="text-blue-600">Quản lý đội huấn luyện viên và lịch biểu</p>
         </div>
-        <Button
-          className="bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600 w-fit"
-          onClick={() => handleOpenDialog()}
-        >
-          <Plus size={20} className="mr-2" />
-          Thêm Huấn Luyện Viên
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            className="bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600 w-fit"
+            onClick={() => handleOpenDialog()}
+          >
+            <Plus size={20} className="mr-2" />
+            Thêm Huấn Luyện Viên
+          </Button>
+
+          <div className="relative">
+            <input
+              type="file"
+              accept=".csv,.txt,.xlsx,.xls"
+              onChange={handleImportExcel}
+              className="absolute inset-0 opacity-0 cursor-pointer"
+            />
+            <Button className="bg-gradient-to-r from-green-700 to-green-500 hover:from-green-800 hover:to-green-600 w-fit">
+              <Upload size={20} className="mr-2" />
+              Import (CSV/Excel)
+            </Button>
+          </div>
+        </div>
       </div>
 
       <div className="mb-6">
@@ -168,9 +324,25 @@ export default function CoachesPage() {
             key={coach.name}
             className="bg-gradient-to-br from-white to-slate-50 border-blue-300 hover:border-blue-500 transition-colors shadow-sm"
           >
-            <CardHeader>
-              <CardTitle className="text-blue-900">{coach.name}</CardTitle>
-              <Badge className="w-fit bg-orange-100 text-orange-700 mt-2">{coach.specialty}</Badge>
+            <CardHeader className="flex flex-row items-start justify-between">
+              <div className="flex-1">
+                <CardTitle className="text-blue-900">{coach.name}</CardTitle>
+                <Badge className="w-fit bg-orange-100 text-orange-700 mt-2">{coach.specialty}</Badge>
+              </div>
+              <Avatar className="h-24 w-24 flex-shrink-0 ml-4 border-4 border-blue-300">
+                <AvatarImage 
+                  src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(coach.name)}`}
+                  alt={coach.name}
+                />
+                <AvatarFallback className="text-white text-2xl font-bold bg-gradient-to-br from-blue-400 to-blue-600">
+                  {coach.name
+                    .split(' ')
+                    .map((word) => word[0])
+                    .join('')
+                    .toUpperCase()
+                    .slice(0, 2)}
+                </AvatarFallback>
+              </Avatar>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">

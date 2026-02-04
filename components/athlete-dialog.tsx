@@ -18,18 +18,24 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-interface Athlete {
+interface Coach {
   id?: string
+  name: string
+  specialty?: string
+}
+
+interface Athlete {
+  id?: number
   name: string
   sport: string
   performance: number
   coach: string
-  joinDate: string
+  joinDate?: string
   qualified?: boolean
   joinMonth?: string
   joinYear?: number
   medals?: { gold: number; silver: number; bronze: number }
-  injuried?: boolean
+  injured?: boolean
   potential?: boolean
 }
 
@@ -39,9 +45,10 @@ interface AthleteDialogProps {
   onSave: (athlete: Athlete) => void
   athlete?: Athlete
   sports: Array<{ name: string }>
+  coaches?: Coach[]
 }
 
-export function AthleteDialog({ isOpen, onClose, onSave, athlete, sports }: AthleteDialogProps) {
+export function AthleteDialog({ isOpen, onClose, onSave, athlete, sports, coaches = [] }: AthleteDialogProps) {
   const [formData, setFormData] = useState<Athlete>({
     name: '',
     sport: '',
@@ -89,7 +96,7 @@ export function AthleteDialog({ isOpen, onClose, onSave, athlete, sports }: Athl
             <label className="text-blue-900 text-sm mb-2 block">Họ và Tên</label>
             <Input
               placeholder="VD: Nguyễn Văn A"
-              value={formData.name}
+              value={formData.name ?? ''}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="bg-white border-blue-300 text-blue-900 placeholder:text-blue-400"
             />
@@ -97,7 +104,7 @@ export function AthleteDialog({ isOpen, onClose, onSave, athlete, sports }: Athl
 
           <div>
             <label className="text-blue-900 text-sm mb-2 block">Môn Thể Thao</label>
-            <Select value={formData.sport} onValueChange={(value) => setFormData({ ...formData, sport: value })}>
+            <Select value={formData.sport ?? ''} onValueChange={(value) => setFormData({ ...formData, sport: value })}>
               <SelectTrigger className="bg-white border-blue-300 text-blue-900">
                 <SelectValue placeholder="Chọn môn thể thao" />
               </SelectTrigger>
@@ -117,27 +124,36 @@ export function AthleteDialog({ isOpen, onClose, onSave, athlete, sports }: Athl
               type="number"
               min="0"
               max="100"
-              value={formData.performance}
+              value={formData.performance ?? 0}
               onChange={(e) => setFormData({ ...formData, performance: parseInt(e.target.value) || 0 })}
               className="bg-white border-blue-300 text-blue-900 placeholder:text-blue-400"
             />
           </div>
 
           <div>
-            <label className="text-blue-900 text-sm mb-2 block">Huấn Luyện Viên</label>
-            <Input
-              placeholder="Tên huấn luyện viên"
-              value={formData.coach}
-              onChange={(e) => setFormData({ ...formData, coach: e.target.value })}
-              className="bg-white border-blue-300 text-blue-900 placeholder:text-blue-400"
-            />
+            <label className="text-blue-900 text-sm mb-2 block">Huấn Luyện Viên (Không bắt buộc)</label>
+            <Select value={formData.coach || 'none'} onValueChange={(value) => setFormData({ ...formData, coach: value === 'none' ? '' : value })}>
+              <SelectTrigger className="bg-white border-blue-300 text-blue-900">
+                <SelectValue placeholder="Chọn huấn luyện viên" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-blue-300">
+                <SelectItem value="none" className="text-blue-900">
+                  Không chọn
+                </SelectItem>
+                {coaches.map((coach) => (
+                  <SelectItem key={coach.name} value={coach.name} className="text-blue-900">
+                    {coach.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           <div>
             <label className="text-blue-900 text-sm mb-2 block">Ngày Tham Gia</label>
             <Input
               type="date"
-              value={formData.joinDate}
+              value={formData.joinDate ?? ''}
               onChange={(e) => setFormData({ ...formData, joinDate: e.target.value })}
               className="bg-white border-blue-300 text-blue-900"
             />

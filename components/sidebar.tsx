@@ -5,14 +5,21 @@ import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/app/auth-context'
 import { Button } from '@/components/ui/button'
-import { BarChart3, Users, Dumbbell, Castle as Whistle, Settings, LogOut, Menu, X } from 'lucide-react'
+import { BarChart3, Users, Dumbbell, Castle as Whistle, Settings, LogOut, Menu, X, FileText } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 
-const navItems = [
-  { href: '/dashboard', label: 'Bảng Điều Khiển', icon: BarChart3 },
+const adminNavItems = [
+  { href: '/dashboard', label: 'Thống kê dữ liệu', icon: BarChart3 },
   { href: '/dashboard/athletes', label: 'Vận Động Viên', icon: Dumbbell },
   { href: '/dashboard/coaches', label: 'Huấn Luyện Viên', icon: Whistle },
+  { href: '/dashboard/applications', label: 'Hồ sơ ứng tuyển', icon: Users },
   // { href: '/dashboard/chat', label: 'ChatBot', icon: Users },
+  { href: '/dashboard/settings', label: 'Cài Đặt', icon: Settings },
+]
+
+const coachNavItems = [
+  { href: '/coach', label: 'Bảng Điều Khiển', icon: BarChart3 },
+  { href: '/coach/training-plans/new', label: 'Tạo Kế Hoạch', icon: FileText },
   { href: '/dashboard/settings', label: 'Cài Đặt', icon: Settings },
 ]
 
@@ -21,6 +28,8 @@ export function Sidebar() {
   const router = useRouter()
   const pathname = usePathname()
   const { logout, user } = useAuth()
+
+  const navItems = user?.role === 'coach' ? coachNavItems : adminNavItems
 
   const handleLogout = () => {
     logout()
@@ -46,11 +55,9 @@ export function Sidebar() {
             <div className="w-10 h-10 bg-gradient-to-br from-blue-700 to-blue-500 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold">⚡</span>
             </div>
-            <h1 className="text-xl font-bold text-blue-900">Sports Hub</h1>
+            <h1 className="text-xl font-bold text-blue-900">Quản lý Dữ liệu - Ngành Thể thao</h1>
           </div>
-          <p className="text-xs text-blue-600">Hệ Thống Quản Lý</p>
         </div>
-
         <nav className="flex-1 p-4 space-y-2">
           {navItems.map(({ href, label, icon: Icon }) => {
             const isActive = pathname === href
@@ -97,5 +104,37 @@ export function Sidebar() {
         )}
       </div>
     </>
+  )
+}
+
+export default function Home() {
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Dữ liệu Vận động viên</h1>
+      <table className="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <thead className="bg-gray-100">
+          <tr>
+            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 uppercase">Tên</th>
+            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 uppercase">Môn Thể Thao</th>
+            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 uppercase">Hiệu Suất</th>
+            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 uppercase">Huấn Luyện Viên</th>
+          </tr>
+        </thead>
+        <tbody className="text-gray-600">
+          <tr className="hover:bg-gray-50 transition-colors duration-200">
+            <td className="py-3 px-4 border-b border-gray-200">Nguyễn Văn A</td>
+            <td className="py-3 px-4 border-b border-gray-200">Điền kinh</td>
+            <td className="py-3 px-4 border-b border-gray-200">85</td>
+            <td className="py-3 px-4 border-b border-gray-200">Nguyễn Văn Thành</td>
+          </tr>
+          <tr className="hover:bg-gray-50 transition-colors duration-200">
+            <td className="py-3 px-4 border-b border-gray-200">Trần Thị B</td>
+            <td className="py-3 px-4 border-b border-gray-200">Bơi lội</td>
+            <td className="py-3 px-4 border-b border-gray-200">90</td>
+            <td className="py-3 px-4 border-b border-gray-200">Mike Thompson</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   )
 }

@@ -1,0 +1,216 @@
+{
+  "🥊 Võ thuật": {
+    "sport": "🥊 Võ thuật",
+    "sportName": "Võ thuật",
+    "criteria": [
+      {
+        "id": "duration",
+        "name": "Thời gian luyện tập",
+        "type": "number",
+        "unit": "phút",
+        "description": "Tổng thời gian buổi luyện tập",
+        "min": 0,
+        "max": 300
+      },
+      {
+        "id": "warmup",
+        "name": "Khởi động",
+        "type": "number",
+        "unit": "phút",
+        "description": "Thời gian khởi động",
+        "min": 0,
+        "max": 60
+      },
+      {
+        "id": "technique_level",
+        "name": "Mức độ kỹ thuật cải thiện",
+        "type": "select",
+        "unit": "",
+        "description": "Đánh giá mức độ cải thiện kỹ thuật",
+        "options": ["Rất yếu", "Yếu", "Trung bình", "Tốt", "Rất tốt"]
+      },
+      {
+        "id": "punch_accuracy",
+        "name": "Độ chính xác đấm",
+        "type": "number",
+        "unit": "%",
+        "description": "Tỷ lệ phần trăm đấm trúng mục tiêu",
+        "min": 0,
+        "max": 100
+      },
+      {
+        "id": "kick_accuracy",
+        "name": "Độ chính xác đá",
+        "type": "number",
+        "unit": "%",
+        "description": "Tỷ lệ phần trăm đá trúng mục tiêu",
+        "min": 0,
+        "max": 100
+      },
+      {
+        "id": "defense_skill",
+        "name": "Kỹ năng phòng thủ",
+        "type": "select",
+        "unit": "",
+        "description": "Đánh giá kỹ năng phòng chống",
+        "options": ["Rất yếu", "Yếu", "Trung bình", "Tốt", "Rất tốt"]
+      },
+      {
+        "id": "endurance",
+        "name": "Sức bền",
+        "type": "select",
+        "unit": "",
+        "description": "Đánh giá sức bền trong buổi luyện tập",
+        "options": ["Rất yếu", "Yếu", "Trung bình", "Tốt", "Rất tốt"]
+      },
+      {
+        "id": "speed_execution",
+        "name": "Tốc độ thực hiện động tác",
+        "type": "number",
+        "unit": "động tác/phút",
+        "description": "Số lượng động tác thực hiện trong 1 phút",
+        "min": 0,
+        "max": 200
+      },
+      {
+        "id": "sparring_rounds",
+        "name": "Số hiệp đấu thực chiến",
+        "type": "number",
+        "unit": "hiệp",
+        "description": "Số lượng hiệp đấu thực chiến",
+        "min": 0,
+        "max": 20
+      },
+      {
+        "id": "notes",
+        "name": "Ghi chú",
+        "type": "text",
+        "unit": "",
+        "description": "Nhận xét và ghi chú từ huấn luyện viên"
+      }
+    ]
+  },
+  "🏊 Bơi lội": {
+    "sport": "🏊 Bơi lội",
+    "sportName": "Bơi lội",
+    "criteria": [
+      {
+        "id": "duration",
+        "name": "Thời gian luyện tập",
+        "type": "number",
+        "unit": "phút",
+        "description": "Tổng thời gian buổi luyện tập",
+        "min": 0,
+        "max": 300
+      },
+      {
+        "id": "warmup",
+        "name": "Khởi động",
+        "type": "number",
+        "unit": "phút",
+        "description": "Thời gian khởi động",
+        "min": 0,
+        "max": 60
+      },
+      {
+        "id": "swim_style",
+        "name": "Kiểu bơi chính",
+        "type": "select",
+        "unit": "",
+        "description": "Kiểu bơi tập trung",
+        "options": ["Bơi tự do", "Bơi ếch", "Bơi ngửa", "Bơi bướm", "Trộn hợp"]
+      },
+      {
+        "id": "total_distance",
+        "name": "Tổng quãng đường bơi",
+        "type": "number",
+        "unit": "mét",
+        "description": "Tổng quãng đường bơi trong buổi",
+        "min": 0,
+        "max": 10000
+      },
+      {
+        "id": "main_training_distance",
+        "name": "Quãng đường tập chính",
+        "type": "number",
+        "unit": "mét",
+        "description": "Quãng đường tập luyện chính",
+        "min": 0,
+        "max": 5000
+      },
+      {
+        "id": "swimming_pace",
+        "name": "Nhịp độ bơi",
+        "type": "number",
+        "unit": "phút/100m",
+        "description": "Thời gian bơi 100m",
+        "min": 0.5,
+        "max": 10
+      },
+      {
+        "id": "kick_power",
+        "name": "Sức mạnh đạp chân",
+        "type": "select",
+        "unit": "",
+        "description": "Đánh giá sức mạnh đạp chân",
+        "options": ["Rất yếu", "Yếu", "Trung bình", "Tốt", "Rất tốt"]
+      },
+      {
+        "id": "arm_technique",
+        "name": "Kỹ thuật xoay tay",
+        "type": "select",
+        "unit": "",
+        "description": "Đánh giá kỹ thuật xoay tay",
+        "options": ["Rất yếu", "Yếu", "Trung bình", "Tốt", "Rất tốt"]
+      },
+      {
+        "id": "breathing_technique",
+        "name": "Kỹ thuật thở",
+        "type": "select",
+        "unit": "",
+        "description": "Đánh giá kỹ thuật thở",
+        "options": ["Rất yếu", "Yếu", "Trung bình", "Tốt", "Rất tốt"]
+      },
+      {
+        "id": "body_position",
+        "name": "Tư thế cơ thể",
+        "type": "select",
+        "unit": "",
+        "description": "Đánh giá tư thế cơ thể khi bơi",
+        "options": ["Rất yếu", "Yếu", "Trung bình", "Tốt", "Rất tốt"]
+      },
+      {
+        "id": "endurance",
+        "name": "Sức bền",
+        "type": "select",
+        "unit": "",
+        "description": "Đánh giá sức bền trong buổi luyện tập",
+        "options": ["Rất yếu", "Yếu", "Trung bình", "Tốt", "Rất tốt"]
+      },
+      {
+        "id": "turns_quality",
+        "name": "Chất lượng lật tường",
+        "type": "select",
+        "unit": "",
+        "description": "Đánh giá chất lượng lật tường",
+        "options": ["Rất yếu", "Yếu", "Trung bình", "Tốt", "Rất tốt"]
+      },
+      {
+        "id": "recovery_sets",
+        "name": "Số bộ luyện phục hồi",
+        "type": "number",
+        "unit": "bộ",
+        "description": "Số bộ tập phục hồi",
+        "min": 0,
+        "max": 20
+      },
+      {
+        "id": "notes",
+        "name": "Ghi chú",
+        "type": "text",
+        "unit": "",
+        "description": "Nhận xét và ghi chú từ huấn luyện viên"
+      }
+    ]
+  }
+}

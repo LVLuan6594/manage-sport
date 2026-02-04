@@ -57,8 +57,8 @@ export default function LoginPage() {
               <span className="text-white font-bold text-xl">⚡</span>
             </div>
           </div>
-          <CardTitle className="text-2xl text-white">Trung Tâm Thể Thao</CardTitle>
-          <CardDescription className="text-blue-200">Hệ Thống Quản Lý</CardDescription>
+          <CardTitle className="text-2xl text-white">Hệ thống Quản lý</CardTitle>
+          <CardDescription className="text-blue-200">Trung tâm Huấn luyện và thi đấu Thể thao tỉnh Vĩnh Long</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -73,9 +73,10 @@ export default function LoginPage() {
               <label className="text-sm font-medium text-white">Tên đăng nhập</label>
               <Input
                 type="text"
-                placeholder="admin"
+                placeholder="Vui lòng nhập tên đăng nhập..."
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSubmit(e as any)}
                 className="bg-slate-800/50 border-blue-400/30 text-white placeholder:text-slate-400 focus:border-blue-500"
                 disabled={isLoading}
               />
@@ -85,9 +86,10 @@ export default function LoginPage() {
               <label className="text-sm font-medium text-white">Mật khẩu</label>
               <Input
                 type="password"
-                placeholder="••••••••"
+                placeholder="Vui lòng nhập mật khẩu..."
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSubmit(e as any)}
                 className="bg-slate-800/50 border-blue-400/30 text-white placeholder:text-slate-400 focus:border-blue-500"
                 disabled={isLoading}
               />
@@ -102,13 +104,18 @@ export default function LoginPage() {
             </Button>
 
             {/* <div className="pt-4 border-t border-slate-700">
-              <p className="text-xs text-slate-400 text-center">
-                Thông tin đăng nhập demo:
-                <br />
-                Tên đăng nhập: <span className="text-blue-400 font-mono">admin</span>
-                <br />
-                Mật khẩu: <span className="text-blue-400 font-mono">admin@123</span>
-              </p>
+              <p className="text-xs text-slate-400 text-center mb-2 font-semibold">Tài khoản Demo:</p>
+              <div className="space-y-2 text-xs text-slate-400">
+                <div className="bg-slate-800/30 p-2 rounded">
+                  <p className="text-blue-400 font-mono">Admin: admin / admin@123</p>
+                </div>
+                <div className="bg-slate-800/30 p-2 rounded">
+                  <p className="text-blue-400 font-mono">Huấn luyện viên Võ: coach_boxing / coach@123</p>
+                </div>
+                <div className="bg-slate-800/30 p-2 rounded">
+                  <p className="text-blue-400 font-mono">Huấn luyện viên Bơi: coach_swimming / coach@123</p>
+                </div>
+              </div>
             </div> */}
           </form>
         </CardContent>

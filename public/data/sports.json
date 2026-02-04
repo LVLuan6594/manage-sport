@@ -2,55 +2,181 @@
   {
     "id": 1,
     "name": "Basketball",
-    "athleteCount": 2,
+    "athleteCount": 12,
     "achievements": "Huy chương vàng tại giải vô địch khu vực",
-    "description": "Bóng rổ là môn thể thao đối kháng có đội hình 5 người",
+    "description": "Bóng rổ là môn thể thao đối kháng có đội hình 5 người, thi đấu trên sân hình chữ nhật, đòi hỏi sự phối hợp nhịp nhàng giữa các thành viên trong đội. Môn thể thao này giúp phát triển toàn diện thể lực, tốc độ, sức bền, khả năng phản xạ và tư duy chiến thuật. Bóng rổ đặc biệt phù hợp với những vận động viên có chiều cao tốt, tinh thần đồng đội cao và khả năng xử lý tình huống linh hoạt trong thi đấu.",
     "coach": "Mike Thompson",
     "competitions": ["Giải vô địch khu vực", "Giải quốc gia"]
   },
   {
     "id": 2,
-    "name": "Swimming",
-    "athleteCount": 2,
-    "achievements": "Lập kỷ lục quốc gia",
-    "description": "Bơi lặn là môn thể thao dưới nước phát triển sức khỏe toàn diện",
-    "coach": "Lisa Chen",
-    "competitions": ["Giải bơi lặn quốc gia", "Đại hội thể thao"]
+    "name": "Football",
+    "athleteCount": 22,
+    "achievements": "Huy chương bạc giải trẻ toàn quốc",
+    "description": "Bóng đá là môn thể thao đồng đội thi đấu 11 người, yêu cầu sự phối hợp chặt chẽ giữa các cầu thủ trong chiến thuật tấn công và phòng ngự. Môn thể thao này giúp rèn luyện thể lực, sức bền, tốc độ, kỹ năng cá nhân và tinh thần kỷ luật, đồng thời phát triển khả năng làm việc nhóm và tư duy chiến thuật trong thi đấu.",
+    "coach": "Nguyễn Văn Hùng",
+    "competitions": ["Giải U21 Quốc gia", "Đại hội TDTT"]
   },
   {
     "id": 3,
-    "name": "Track & Field",
-    "athleteCount": 2,
-    "achievements": "Huy chương vàng tại giải quốc gia",
-    "description": "Điền kinh là môn thể thao cơ bản bao gồm chạy, nhảy, ném",
-    "coach": "Tom Rodriguez",
-    "competitions": ["Giải điền kinh quốc gia", "Đại hội thể thao"]
+    "name": "Volleyball",
+    "athleteCount": 14,
+    "achievements": "Huy chương đồng giải vô địch quốc gia",
+    "description": "Bóng chuyền thi đấu theo hình thức 6 người mỗi đội",
+    "coach": "Trần Văn Long",
+    "competitions": ["Giải bóng chuyền VĐQG", "Đại hội TDTT"]
   },
   {
     "id": 4,
-    "name": "Volleyball",
-    "athleteCount": 1,
-    "achievements": "Đạt huy chương bạc",
-    "description": "Bóng chuyền là môn thể thao đối kháng dùng tay",
-    "coach": "Anna Martinez",
-    "competitions": ["Giải bóng chuyền quốc gia"]
+    "name": "Athletics",
+    "athleteCount": 18,
+    "achievements": "Huy chương vàng giải điền kinh toàn quốc",
+    "description": "Điền kinh là môn thể thao cơ bản bao gồm các nội dung chạy, nhảy và ném, giúp phát triển toàn diện tốc độ, sức bền, sức mạnh và khả năng phối hợp vận động. Đây là nền tảng quan trọng cho nhiều môn thể thao khác, phù hợp với việc tuyển chọn và đào tạo vận động viên năng khiếu ở nhiều lứa tuổi.",
+    "coach": "Nguyễn Văn Thành",
+    "competitions": ["Giải điền kinh quốc gia", "Đại hội TDTT"]
   },
   {
     "id": 5,
-    "name": "Tennis",
-    "athleteCount": 1,
-    "achievements": "Đạt huy chương vàng đôi nam",
-    "description": "Tennis là môn thể thao vợt trên sân cỏ hoặc sân cứng",
-    "coach": "John Wilson",
-    "competitions": ["Giải tennis quốc gia", "Giải khu vực"]
+    "name": "Swimming",
+    "athleteCount": 10,
+    "achievements": "Huy chương bạc giải trẻ toàn quốc",
+    "description": "Bơi lội là môn thể thao thi đấu các nội dung tự do, ếch, ngửa và bướm, giúp phát triển toàn diện sức bền, thể lực, sự dẻo dai và khả năng kiểm soát hơi thở. Môn thể thao này góp phần nâng cao sức khỏe, cải thiện kỹ thuật vận động và phù hợp với nhiều lứa tuổi tham gia huấn luyện, thi đấu.",
+    "coach": "Phạm Quốc Dũng",
+    "competitions": ["Giải bơi lội quốc gia", "Giải trẻ toàn quốc"]
   },
   {
     "id": 6,
+    "name": "Badminton",
+    "athleteCount": 8,
+    "achievements": "Huy chương vàng giải tỉnh",
+    "description": "Cầu lông là môn thể thao đối kháng sử dụng vợt, thi đấu các nội dung đơn và đôi, đòi hỏi tốc độ, sự khéo léo, phản xạ nhanh và kỹ thuật chính xác. Môn thể thao này giúp phát triển thể lực, khả năng di chuyển linh hoạt và tư duy chiến thuật, phù hợp với việc đào tạo vận động viên ở nhiều lứa tuổi.",
+    "coach": "Nguyễn Quốc Việt",
+    "competitions": ["Giải cầu lông tỉnh", "Giải cầu lông quốc gia"]
+  },
+  {
+    "id": 7,
+    "name": "Table Tennis",
+    "athleteCount": 6,
+    "achievements": "Huy chương đồng giải trẻ",
+    "description": "Bóng bàn yêu cầu tốc độ và phản xạ cao",
+    "coach": "Phan Văn Hùng",
+    "competitions": ["Giải bóng bàn trẻ", "Giải quốc gia"]
+  },
+  {
+    "id": 8,
+    "name": "Taekwondo",
+    "athleteCount": 15,
+    "achievements": "Huy chương vàng giải vô địch quốc gia",
+    "description": "Taekwondo là môn võ đối kháng và biểu diễn quyền",
+    "coach": "Nguyễn Minh Tâm",
+    "competitions": ["Giải Taekwondo quốc gia", "SEA Games"]
+  },
+  {
+    "id": 9,
+    "name": "Karate",
+    "athleteCount": 12,
+    "achievements": "Huy chương bạc giải toàn quốc",
+    "description": "Karate gồm các nội dung kata và kumite",
+    "coach": "Trần Văn Sơn",
+    "competitions": ["Giải Karate quốc gia"]
+  },
+  {
+    "id": 10,
+    "name": "Judo",
+    "athleteCount": 9,
+    "achievements": "Huy chương đồng giải quốc gia",
+    "description": "Judo là môn võ đối kháng có nguồn gốc từ Nhật Bản",
+    "coach": "Lê Quốc Thắng",
+    "competitions": ["Giải Judo quốc gia"]
+  },
+  {
+    "id": 11,
+    "name": "Wushu",
+    "athleteCount": 11,
+    "achievements": "Huy chương vàng giải trẻ",
+    "description": "Wushu gồm nội dung biểu diễn và đối kháng",
+    "coach": "Trần Quang Vinh",
+    "competitions": ["Giải Wushu quốc gia"]
+  },
+  {
+    "id": 12,
+    "name": "Vovinam",
+    "athleteCount": 13,
+    "achievements": "Huy chương bạc giải toàn quốc",
+    "description": "Vovinam là môn võ truyền thống Việt Nam",
+    "coach": "Ngô Văn Phú",
+    "competitions": ["Giải Vovinam quốc gia"]
+  },
+  {
+    "id": 13,
+    "name": "Weightlifting",
+    "athleteCount": 7,
+    "achievements": "Huy chương vàng giải vô địch quốc gia",
+    "description": "Cử tạ thi đấu theo các hạng cân nam và nữ",
+    "coach": "Đặng Quốc Bảo",
+    "competitions": ["Giải cử tạ quốc gia", "SEA Games"]
+  },
+  {
+    "id": 14,
     "name": "Gymnastics",
-    "athleteCount": 1,
-    "achievements": "Huy chương tại giải khu vực",
-    "description": "Thể dục là môn thể thao tập luyện kỹ năng cân bằng và uốn éo",
-    "coach": "Mike Thompson",
-    "competitions": ["Giải thể dục quốc gia", "Đại hội thể thao"]
+    "athleteCount": 6,
+    "achievements": "Huy chương bạc giải quốc gia",
+    "description": "Thể dục dụng cụ yêu cầu kỹ thuật và độ chính xác cao",
+    "coach": "Hoàng Văn Sơn",
+    "competitions": ["Giải TD dụng cụ quốc gia"]
+  },
+  {
+    "id": 15,
+    "name": "Rowing",
+    "athleteCount": 8,
+    "achievements": "Huy chương vàng giải trẻ toàn quốc",
+    "description": "Rowing là môn đua thuyền sử dụng sức bền và phối hợp",
+    "coach": "Nguyễn Văn Lộc",
+    "competitions": ["Giải rowing quốc gia"]
+  },
+  {
+    "id": 16,
+    "name": "Cycling",
+    "athleteCount": 9,
+    "achievements": "Huy chương đồng giải quốc gia",
+    "description": "Xe đạp thi đấu các nội dung đường trường và địa hình",
+    "coach": "Lê Quốc Huy",
+    "competitions": ["Giải xe đạp quốc gia"]
+  },
+  {
+    "id": 17,
+    "name": "Archery",
+    "athleteCount": 5,
+    "achievements": "Huy chương bạc giải trẻ",
+    "description": "Bắn cung yêu cầu độ chính xác và tập trung cao",
+    "coach": "Phạm Văn Thịnh",
+    "competitions": ["Giải bắn cung quốc gia"]
+  },
+  {
+    "id": 18,
+    "name": "Shooting",
+    "athleteCount": 6,
+    "achievements": "Huy chương vàng giải vô địch quốc gia",
+    "description": "Bắn súng thi đấu các nội dung súng ngắn và súng trường",
+    "coach": "Trần Quốc Cường",
+    "competitions": ["Giải bắn súng quốc gia"]
+  },
+  {
+    "id": 19,
+    "name": "Chess",
+    "athleteCount": 10,
+    "achievements": "Huy chương vàng giải trẻ",
+    "description": "Cờ vua phát triển tư duy chiến thuật và logic",
+    "coach": "Đỗ Hoàng Anh",
+    "competitions": ["Giải cờ vua quốc gia"]
+  },
+  {
+    "id": 20,
+    "name": "Traditional Chess",
+    "athleteCount": 8,
+    "achievements": "Huy chương bạc giải toàn quốc",
+    "description": "Cờ tướng là môn thể thao trí tuệ truyền thống",
+    "coach": "Nguyễn Văn Khoa",
+    "competitions": ["Giải cờ tướng quốc gia"]
   }
 ]

@@ -1,8 +1,35 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts'
 import { Users, Dumbbell, TrendingUp, Award } from 'lucide-react'
+import { useState, useEffect } from 'react'
+
+interface Athlete {
+  id: number
+  name: string
+  sport: string
+  performance: number
+  qualified: boolean
+  joinMonth: string
+  joinYear: number
+  medals: { gold: number; silver: number; bronze: number }
+  injured: boolean
+  potential: boolean
+  age?: number
+  height?: number
+  coach?: string
+}
+
+interface Coach {
+  id: string
+  name: string
+  specialty: string
+  experience: number
+  athletesManaged: number
+  efficiency: number
+}
 
 const performanceData = [
   { month: 'Jan', athletes: 24, coaches: 8 },
@@ -21,6 +48,35 @@ const athleteProgressData = [
 ]
 
 export default function DashboardPage() {
+  const [athletes, setAthletes] = useState<Athlete[]>([])
+  const [coaches, setCoaches] = useState<Coach[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [athletesRes, coachesRes] = await Promise.all([
+          fetch('/api/athletes'),
+          fetch('/api/coaches'),
+        ])
+
+        if (athletesRes.ok) setAthletes(await athletesRes.json())
+        if (coachesRes.ok) setCoaches(await coachesRes.json())
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  const totalAthletes = athletes.length
+  const totalCoaches = coaches.length
+  const qualifiedAthletes = athletes.filter((a) => a.qualified).length
+  const totalMedals = athletes.reduce((sum, a) => sum + (a.medals?.gold || 0) + (a.medals?.silver || 0) + (a.medals?.bronze || 0), 0)
+
   return (
     <main className="p-4 lg:p-8 bg-gradient-to-br from-slate-50 to-white min-h-screen">
       <div className="max-w-7xl mx-auto">
@@ -32,45 +88,69 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <Card className="bg-gradient-to-br from-blue-50 to-white border-blue-300 hover:border-blue-500 transition-colors shadow-sm">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-900">Tổng Vận Động Viên</CardTitle>
+              <div className="flex items-center gap-3">
+                <Avatar className="h-10 w-10 border-2 border-blue-300">
+                  <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=athletes" alt="Athletes" />
+                  <AvatarFallback className="bg-blue-500 text-white">VA</AvatarFallback>
+                </Avatar>
+                <CardTitle className="text-sm font-medium text-blue-900">Tổng Vận Động Viên</CardTitle>
+              </div>
               <Dumbbell className="h-4 w-4 text-blue-700" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-blue-900">9</div>
-              <p className="text-xs text-blue-600 mt-1">↑ 2 vận động viên mới</p>
+              <div className="text-3xl font-bold text-blue-900">{loading ? '...' : totalAthletes}</div>
+              <p className="text-xs text-blue-600 mt-1">Tổng cộng từ cơ sở dữ liệu</p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-orange-50 to-white border-orange-300 hover:border-orange-500 transition-colors shadow-sm">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-900">Tổng Huấn Luyện Viên</CardTitle>
+              <div className="flex items-center gap-3">
+                <Avatar className="h-10 w-10 border-2 border-orange-300">
+                  <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=coaches" alt="Coaches" />
+                  <AvatarFallback className="bg-orange-500 text-white">HLV</AvatarFallback>
+                </Avatar>
+                <CardTitle className="text-sm font-medium text-blue-900">Tổng Huấn Luyện Viên</CardTitle>
+              </div>
               <Users className="h-4 w-4 text-orange-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-blue-900">5</div>
-              <p className="text-xs text-blue-600 mt-1">Quản lý 5 bộ môn thể thao</p>
+              <div className="text-3xl font-bold text-blue-900">{loading ? '...' : totalCoaches}</div>
+              <p className="text-xs text-blue-600 mt-1">Quản lý các vận động viên</p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-green-50 to-white border-green-300 hover:border-green-500 transition-colors shadow-sm">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-900">Vận Động Viên Đạt Tiêu Chuẩn</CardTitle>
+              <div className="flex items-center gap-3">
+                <Avatar className="h-10 w-10 border-2 border-green-300">
+                  <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=qualified" alt="Qualified" />
+                  <AvatarFallback className="bg-green-500 text-white">ĐTC</AvatarFallback>
+                </Avatar>
+                <CardTitle className="text-sm font-medium text-blue-900">Vận Động Viên Đạt Tiêu Chuẩn</CardTitle>
+              </div>
               <TrendingUp className="h-4 w-4 text-green-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-blue-900">7</div>
+              <div className="text-3xl font-bold text-blue-900">{loading ? '...' : qualifiedAthletes}</div>
               <p className="text-xs text-blue-600 mt-1">Sẵn sàng thi quốc gia</p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-blue-50 to-white border-blue-300 hover:border-blue-500 transition-colors shadow-sm">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-900">Tổng Huy Chương</CardTitle>
+              <div className="flex items-center gap-3">
+                <Avatar className="h-10 w-10 border-2 border-yellow-300">
+                  <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=medals" alt="Medals" />
+                  <AvatarFallback className="bg-yellow-500 text-white">HC</AvatarFallback>
+                </Avatar>
+                <CardTitle className="text-sm font-medium text-blue-900">Tổng Huy Chương</CardTitle>
+              </div>
               <Award className="h-4 w-4 text-blue-700" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-blue-900">19</div>
-              <p className="text-xs text-blue-600 mt-1">Năm 2024</p>
+              <div className="text-3xl font-bold text-blue-900">{loading ? '...' : totalMedals}</div>
+              <p className="text-xs text-blue-600 mt-1">Tính từ tất cả vận động viên</p>
             </CardContent>
           </Card>
         </div>
