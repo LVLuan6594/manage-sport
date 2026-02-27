@@ -7,8 +7,8 @@ const dataPath = path.join(process.cwd(), 'public', 'data', 'applications.json')
 export async function GET() {
   try {
     const raw = await fs.promises.readFile(dataPath, 'utf-8')
-    const data = JSON.parse(raw || '[]')
-    return NextResponse.json(data)
+    const list = JSON.parse(raw || '[]')
+    return NextResponse.json(list)
   } catch (error) {
     return NextResponse.json([], { status: 500 })
   }
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     const list = JSON.parse(raw || '[]')
 
     const id = Date.now().toString()
-    const record = { id, createdAt: new Date().toISOString(), ...body }
+    const record = { id, createdAt: new Date().toISOString(), status: 'pending', ...body }
 
     list.unshift(record)
 

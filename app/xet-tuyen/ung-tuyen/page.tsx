@@ -116,48 +116,64 @@ export default function AthleteRegisterForm() {
     e.preventDefault();
     if (!validate()) return;
 
-    const payload = {
-      fullName: form.fullName,
-      dob: form.dob,
-      gender: form.gender,
-      idNumber: form.idNumber,
-      address: form.address,
-      phone: form.phone,
-      email: form.email,
-      school: form.school,
-      sport: form.sport,
-      registerType: form.registerType,
-      trainingTime: form.trainingTime,
-      height: form.height,
-      weight: form.weight,
-      achievements: form.achievements,
-      experience: form.experience,
-      talent: form.talent,
-      // include file names only (actual files not uploaded to server in this simple flow)
-      avatarName: form.avatar?.name || null,
-      healthDocName: form.health?.name || null,
-      idDocName: form.idDoc?.name || null,
-      confirmDocName: form.confirmDoc?.name || null,
-      agree: form.agree,
+    // Convert avatar file to base64 if exists
+    let avatarData: string | null = null;
+    if (form.avatar) {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        avatarData = reader.result as string;
+        sendPayload(avatarData);
+      };
+      reader.readAsDataURL(form.avatar);
+      return; // wait for async FileReader
+    } else {
+      sendPayload(null);
     }
 
-    try {
-      const res = await fetch('/api/applications', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
+    async function sendPayload(avatarData: string | null) {
+      const payload = {
+        fullName: form.fullName,
+        dob: form.dob,
+        gender: form.gender,
+        idNumber: form.idNumber,
+        address: form.address,
+        phone: form.phone,
+        email: form.email,
+        school: form.school,
+        sport: form.sport,
+        registerType: form.registerType,
+        trainingTime: form.trainingTime,
+        height: form.height,
+        weight: form.weight,
+        achievements: form.achievements,
+        experience: form.experience,
+        talent: form.talent,
+        avatarData: avatarData, // base64 string or null
+        healthDocName: form.health?.name || null,
+        idDocName: form.idDoc?.name || null,
+        confirmDocName: form.confirmDoc?.name || null,
+        status: 'pending',
+        agree: form.agree,
+      };
 
-      if (!res.ok) throw new Error('Lỗi khi gửi hồ sơ')
+      try {
+        const res = await fetch('/api/applications', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
 
-      setSuccess(true)
-      setTimeout(() => {
-        router.push('/xet-tuyen')
-      }, 1500)
-    } catch (err: any) {
-      setError(err?.message || 'Không thể gửi hồ sơ. Vui lòng thử lại sau.')
+        if (!res.ok) throw new Error('Lỗi khi gửi hồ sơ');
+
+        setSuccess(true);
+        setTimeout(() => {
+          router.push('/xet-tuyen');
+        }, 1500);
+      } catch (err: any) {
+        setError(err?.message || 'Không thể gửi hồ sơ. Vui lòng thử lại sau.');
+      }
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-10 px-4">

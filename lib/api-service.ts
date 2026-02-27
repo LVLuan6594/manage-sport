@@ -113,6 +113,16 @@ class ApiService {
     return this.fetchData('/applications')
   }
 
+  async getApplicationById(id: string): Promise<Application | null> {
+    try {
+      return await this.fetchData(`/applications/${id}`)
+    } catch (err) {
+      // if 404 or other error return null
+      console.warn(`application ${id} not found`, err)
+      return null
+    }
+  }
+
   async createApplication(data: Omit<Application, 'id' | 'createdAt'>): Promise<Application> {
     return this.fetchData('/applications', {
       method: 'POST',

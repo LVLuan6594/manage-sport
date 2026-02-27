@@ -218,3 +218,36 @@ export function useApplications() {
 
   return { applications, loading, error, refetch: async () => setApplications(await apiService.getApplications()) }
 }
+
+// Single application hook
+export function useApplication(id: string | undefined) {
+  const [application, setApplication] = useState<Application | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [notFound, setNotFound] = useState(false)
+
+  useEffect(() => {
+    if (!id) return
+    const fetchOne = async () => {
+      try {
+        setLoading(true)
+        const data = await apiService.getApplicationById(id)
+        if (!data) {
+          setNotFound(true)
+        } else {
+          setApplication(data)
+        }
+        setError(null)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch application')
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchOne()
+  }, [id])
+
+  return { application, loading, error, notFound, refetch: async () => {
+    if (id) setApplication(await apiService.getApplicationById(id))
+  } }
+}

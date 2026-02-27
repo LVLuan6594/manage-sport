@@ -87,9 +87,11 @@ export interface Application {
   experience?: string
   talent?: string
   avatarName?: string | null
+  avatarData?: string | null
   healthDocName?: string | null
   idDocName?: string | null
   confirmDocName?: string | null
+  status?: 'pending' | 'approved' | 'rejected'
   agree: boolean
 }
 

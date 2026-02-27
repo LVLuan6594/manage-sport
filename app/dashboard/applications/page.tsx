@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 interface Application {
   id: string
@@ -21,6 +22,7 @@ interface Application {
   experience?: string
   talent?: string
   avatarName?: string | null
+  avatarData?: string | null
   healthDocName?: string | null
   idDocName?: string | null
   confirmDocName?: string | null
@@ -29,6 +31,7 @@ interface Application {
 export default function ApplicationsPage() {
   const [items, setItems] = useState<Application[]>([])
   const [loading, setLoading] = useState(true)
+  const router = useRouter()
 
   useEffect(() => {
     async function load() {
@@ -59,6 +62,7 @@ export default function ApplicationsPage() {
                 <th className="px-4 py-2 text-left">SĐT</th>
                 <th className="px-4 py-2 text-left">Email</th>
                 <th className="px-4 py-2 text-left">Ngày nộp</th>
+                <th className="px-4 py-2 text-left">Trạng thái</th>
               </tr>
             </thead>
             <tbody>
@@ -73,13 +77,26 @@ export default function ApplicationsPage() {
                 </tr>
               )}
               {items.map((it) => (
-                <tr key={it.id} className="hover:bg-gray-50">
+                <tr
+                  key={it.id}
+                  className="hover:bg-gray-50 cursor-pointer"
+                  onClick={() => router.push(`/dashboard/applications/${it.id}`)}
+                >
                   <td className="px-4 py-3 border-b">{it.id}</td>
                   <td className="px-4 py-3 border-b">{it.fullName}</td>
                   <td className="px-4 py-3 border-b">{it.sport}</td>
                   <td className="px-4 py-3 border-b">{it.phone}</td>
                   <td className="px-4 py-3 border-b">{it.email}</td>
                   <td className="px-4 py-3 border-b">{new Date(it.createdAt).toLocaleString()}</td>
+                  <td className="px-4 py-3 border-b">
+                    <span className={`font-semibold ${it.status === 'approved' ? 'text-green-600' : it.status === 'rejected' ? 'text-red-600' : 'text-yellow-600'}`}>
+                      {it.status === 'approved'
+                        ? 'Đã duyệt'
+                        : it.status === 'rejected'
+                        ? 'Đã từ chối'
+                        : 'Chưa duyệt'}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>
