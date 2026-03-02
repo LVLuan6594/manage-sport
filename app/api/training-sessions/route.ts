@@ -21,7 +21,8 @@ export async function GET(req: NextRequest) {
     const athleteId = searchParams.get('athleteId')
     
     if (athleteId) {
-      return NextResponse.json(data.filter((item: any) => item.athleteId === athleteId))
+      const athleteIdNum = parseInt(athleteId, 10)
+      return NextResponse.json(data.filter((item: any) => item.athleteId === athleteIdNum))
     }
     
     return NextResponse.json(data)

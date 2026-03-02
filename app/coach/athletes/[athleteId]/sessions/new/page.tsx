@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { useAuth } from '@/app/auth-context'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 interface Criteria {
   id: string
@@ -33,6 +34,7 @@ export default function LogTrainingSession() {
   const [athleteName, setAthleteName] = useState('')
   const [sessionDate, setSessionDate] = useState(new Date().toISOString().split('T')[0])
   const [formData, setFormData] = useState<{ [key: string]: string | number }>({})
+  const [error, setError] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,7 +48,7 @@ export default function LogTrainingSession() {
             setAthleteName(athlete.name)
 
             // Fetch training criteria
-            const criteriaRes = await fetch('/public/data/training-criteria.json')
+            const criteriaRes = await fetch('/data/training-criteria.json')
             if (criteriaRes.ok) {
               const criteriaData = await criteriaRes.json()
               const sportCriteria = criteriaData[athlete.sport]
@@ -58,7 +60,11 @@ export default function LogTrainingSession() {
                   initial[c.id] = ''
                 })
                 setFormData(initial)
+              } else {
+                setError('Không tìm thấy tiêu chí luyện tập cho môn ' + athlete.sport)
               }
+            } else {
+              setError('Lỗi khi tải tiêu chí luyện tập')
             }
           }
         }
@@ -80,6 +86,14 @@ export default function LogTrainingSession() {
     e.preventDefault()
     setSubmitting(true)
 
+    // Validate that at least one metric is filled
+    const hasMetrics = Object.values(formData).some(v => v !== '' && v !== null)
+    if (!hasMetrics) {
+      alert('Vui lòng nhập ít nhất một thông số luyện tập')
+      setSubmitting(false)
+      return
+    }
+
     try {
       const session = {
         athleteId: parseInt(athleteId),
@@ -98,13 +112,17 @@ export default function LogTrainingSession() {
 
       if (res.ok) {
         alert('Lưu thông số luyện tập thành công!')
-        router.push(`/coach/athletes/${athleteId}`)
+        // Add a small delay to ensure server has processed the save
+        setTimeout(() => {
+          router.push(`/coach/athletes/${athleteId}`)
+        }, 300)
       } else {
-        alert('Lỗi khi lưu thông số')
+        const error = await res.json()
+        alert('Lỗi khi lưu thông số: ' + (error.error || 'Vui lòng thử lại'))
       }
     } catch (error) {
       console.error(error)
-      alert('Lỗi khi lưu thông số')
+      alert('Lỗi khi lưu thông số. Vui lòng thử lại sau')
     } finally {
       setSubmitting(false)
     }
@@ -122,13 +140,11 @@ export default function LogTrainingSession() {
     <main className="p-4 lg:p-8 bg-gradient-to-br from-slate-50 to-white min-h-screen">
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
-          <Button
-            onClick={() => router.back()}
-            variant="outline"
-            className="mb-4"
-          >
-            ← Quay Lại
-          </Button>
+          <Link href="/coach">
+            <Button variant="outline" className="mb-4">
+              ← Quay Lại Bảng Điều Khiển
+            </Button>
+          </Link>
           <h1 className="text-3xl font-bold text-blue-900">Nhập Thông Số Luyện Tập</h1>
           <p className="text-blue-600 mt-2">Vận động viên: {athleteName}</p>
         </div>
@@ -139,6 +155,12 @@ export default function LogTrainingSession() {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+                  {error}
+                </div>
+              )}
+
               <div>
                 <label className="block text-sm font-semibold text-blue-900 mb-2">
                   Ngày Luyện Tập <span className="text-red-500">*</span>
@@ -151,55 +173,63 @@ export default function LogTrainingSession() {
                 />
               </div>
 
-              {criteria.map((crit) => (
-                <div key={crit.id}>
-                  <label className="block text-sm font-semibold text-blue-900 mb-2">
-                    {crit.name}
-                    {crit.unit && <span className="text-gray-600 text-xs ml-2">({crit.unit})</span>}
-                  </label>
-                  {crit.description && (
-                    <p className="text-xs text-gray-600 mb-2">{crit.description}</p>
-                  )}
+              {loading ? (
+                <div className="text-center py-8 text-blue-600">Đang tải tiêu chí luyện tập...</div>
+              ) : criteria.length === 0 ? (
+                <div className="text-center py-8 text-gray-600">Không có tiêu chí luyện tập nào để hiển thị</div>
+              ) : (
+                <>
+                  {criteria.map((crit) => (
+                    <div key={crit.id}>
+                      <label className="block text-sm font-semibold text-blue-900 mb-2">
+                        {crit.name}
+                        {crit.unit && <span className="text-gray-600 text-xs ml-2">({crit.unit})</span>}
+                      </label>
+                      {crit.description && (
+                        <p className="text-xs text-gray-600 mb-2">{crit.description}</p>
+                      )}
 
-                  {crit.type === 'number' && (
-                    <input
-                      type="number"
-                      value={formData[crit.id]}
-                      onChange={(e) => handleChange(crit.id, e.target.value)}
-                      step={0.1}
-                      min={crit.min}
-                      max={crit.max}
-                      placeholder={`${crit.min || 0} - ${crit.max || 'không giới hạn'}`}
-                      className="w-full border-2 border-blue-200 rounded px-3 py-2 focus:border-blue-500 focus:outline-none"
-                    />
-                  )}
+                      {crit.type === 'number' && (
+                        <input
+                          type="number"
+                          value={formData[crit.id]}
+                          onChange={(e) => handleChange(crit.id, e.target.value)}
+                          step={0.1}
+                          min={crit.min}
+                          max={crit.max}
+                          placeholder={`${crit.min || 0} - ${crit.max || 'không giới hạn'}`}
+                          className="w-full border-2 border-blue-200 rounded px-3 py-2 focus:border-blue-500 focus:outline-none"
+                        />
+                      )}
 
-                  {crit.type === 'select' && (
-                    <select
-                      value={formData[crit.id]}
-                      onChange={(e) => handleChange(crit.id, e.target.value)}
-                      className="w-full border-2 border-blue-200 rounded px-3 py-2 focus:border-blue-500 focus:outline-none"
-                    >
-                      <option value="">-- Chọn --</option>
-                      {crit.options?.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                  )}
+                      {crit.type === 'select' && (
+                        <select
+                          value={formData[crit.id]}
+                          onChange={(e) => handleChange(crit.id, e.target.value)}
+                          className="w-full border-2 border-blue-200 rounded px-3 py-2 focus:border-blue-500 focus:outline-none"
+                        >
+                          <option value="">-- Chọn --</option>
+                          {crit.options?.map((opt) => (
+                            <option key={opt} value={opt}>
+                              {opt}
+                            </option>
+                          ))}
+                        </select>
+                      )}
 
-                  {crit.type === 'text' && (
-                    <textarea
-                      value={formData[crit.id]}
-                      onChange={(e) => handleChange(crit.id, e.target.value)}
-                      placeholder="Nhập ghi chú"
-                      rows={2}
-                      className="w-full border-2 border-blue-200 rounded px-3 py-2 focus:border-blue-500 focus:outline-none"
-                    />
-                  )}
-                </div>
-              ))}
+                      {crit.type === 'text' && (
+                        <textarea
+                          value={formData[crit.id]}
+                          onChange={(e) => handleChange(crit.id, e.target.value)}
+                          placeholder="Nhập ghi chú"
+                          rows={2}
+                          className="w-full border-2 border-blue-200 rounded px-3 py-2 focus:border-blue-500 focus:outline-none"
+                        />
+                      )}
+                    </div>
+                  ))}
+                </>
+              )}
 
               <div className="flex gap-3 pt-4">
                 <Button

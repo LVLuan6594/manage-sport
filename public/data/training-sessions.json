@@ -1,5 +1,40 @@
 [
   {
+    "id": "1772435594260",
+    "createdAt": "2026-03-02T07:13:14.260Z",
+    "athleteId": 2,
+    "athleteName": "Nguyễn Thanh Nhàn",
+    "sport": "🏊 Bơi lội",
+    "coachUsername": "coach_swimming",
+    "sessionDate": "2026-03-02",
+    "metrics": {
+      "duration": "23",
+      "warmup": "12",
+      "swim_style": "Bơi tự do",
+      "total_distance": "12",
+      "main_training_distance": "11.8",
+      "swimming_pace": "10",
+      "kick_power": "Yếu",
+      "arm_technique": "Trung bình",
+      "breathing_technique": "Trung bình",
+      "body_position": "Yếu",
+      "endurance": "Trung bình",
+      "turns_quality": "Trung bình",
+      "recovery_sets": "2",
+      "notes": "cần luyện tập thêm"
+    }
+  },
+  {
+    "id": "1772435033145",
+    "createdAt": "2026-03-02T07:03:53.145Z",
+    "athleteId": 2,
+    "athleteName": "Nguyễn Thanh Nhàn",
+    "sport": "🏊 Bơi lội",
+    "coachUsername": "coach_swimming",
+    "sessionDate": "2026-03-02",
+    "metrics": {}
+  },
+  {
     "id": "1770173149344",
     "createdAt": "2026-02-04T02:45:49.344Z",
     "athleteId": 2,

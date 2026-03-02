@@ -45,7 +45,8 @@ export default function CoachAthleteDetail() {
           // Fetch sessions for this athlete
           const sessionsRes = await fetch(`/api/training-sessions?athleteId=${athleteId}`)
           if (sessionsRes.ok) {
-            setSessions(await sessionsRes.json())
+            const data = await sessionsRes.json()
+            setSessions(Array.isArray(data) ? data : [])
           }
         }
       } catch (error) {
@@ -78,13 +79,11 @@ export default function CoachAthleteDetail() {
     <main className="p-4 lg:p-8 bg-gradient-to-br from-slate-50 to-white min-h-screen">
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <Button
-            onClick={() => router.back()}
-            variant="outline"
-            className="mb-4"
-          >
-            ← Quay Lại
-          </Button>
+          <Link href="/coach">
+            <Button variant="outline" className="mb-4">
+              ← Quay Lại Bảng Điều Khiển
+            </Button>
+          </Link>
         </div>
 
         <Card className="bg-white border-blue-300 shadow-md mb-6">

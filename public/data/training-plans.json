@@ -2,6 +2,42 @@
   {
     "id": "",
     "createdAt": "",
+    "title": "Tiêu Đề Kế Hoạch *",
+    "description": "Mô Tả Chi Tiết *",
+    "athleteId": 20,
+    "athleteName": "TEST 2",
+    "sport": "🏊 Bơi lội",
+    "startDate": "2026-01-01",
+    "duration": 4,
+    "goals": "Mục Tiêu Luyện Tập *"
+  },
+  {
+    "id": "",
+    "createdAt": "",
+    "title": "test",
+    "description": "test",
+    "athleteId": 2,
+    "athleteName": "Nguyễn Thanh Nhàn",
+    "sport": "🏊 Bơi lội",
+    "startDate": "2026-01-01",
+    "duration": 10,
+    "goals": "test"
+  },
+  {
+    "id": "",
+    "createdAt": "",
+    "title": "d",
+    "description": "d",
+    "athleteId": 2,
+    "athleteName": "Nguyễn Thanh Nhàn",
+    "sport": "🏊 Bơi lội",
+    "startDate": "2026-01-04",
+    "duration": 6,
+    "goals": "đưa"
+  },
+  {
+    "id": "",
+    "createdAt": "",
     "title": "Kế hoạch sức bền",
     "description": "cho sức bền",
     "athleteId": 2,

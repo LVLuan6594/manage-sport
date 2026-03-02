@@ -1,17 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Mike Thompson",
-    "specialty": "Basketball",
-    "experience": 15,
-    "athletesManaged": 12,
-    "efficiency": 92,
-    "email": "mike.thompson@sportshub.com",
-    "phone": "0901234567",
-    "certification": "FIBA Level 3",
-    "joinDate": "2015-01-15"
-  },
-  {
     "id": 2,
     "name": "Nguyễn Văn Hùng",
     "specialty": "Football",

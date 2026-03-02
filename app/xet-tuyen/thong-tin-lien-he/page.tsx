@@ -46,10 +46,10 @@ export default function ThongTinLienHePage() {
                 <h2 className="text-2xl font-bold text-blue-900 mb-3">Điện Thoại</h2>
                 <p className="text-blue-800 mb-2">
                   <a
-                    href="tel:02703891234"
+                    href="tel:(02703).862.071"
                     className="hover:text-blue-600 transition-colors font-semibold"
                   >
-                    0270 389 1234
+                    (02703).862.071
                   </a>
                 </p>
                 <p className="text-sm text-blue-600">Hotline hỗ trợ tuyển sinh</p>
@@ -68,7 +68,7 @@ export default function ThongTinLienHePage() {
                     href="mailto:tuyensinh@vitinhsport.vn"
                     className="hover:text-blue-600 transition-colors font-semibold"
                   >
-                    tuyensinh@vitinhsport.vn
+                    tttdtt.svhttdl@vinhlong.gov.vn
                   </a>
                 </p>
                 <p className="text-sm text-blue-600">Liên hệ trực tiếp qua email</p>
@@ -84,8 +84,6 @@ export default function ThongTinLienHePage() {
                 <h2 className="text-2xl font-bold text-blue-900 mb-3">Giờ Làm Việc</h2>
                 <ul className="text-blue-800 space-y-1">
                   <li><strong>Thứ Hai - Thứ Sáu:</strong> 7:00 - 17:00</li>
-                  <li><strong>Thứ Bảy:</strong> 7:00 - 12:00</li>
-                  <li><strong>Chủ Nhật:</strong> Đóng cửa</li>
                 </ul>
               </div>
             </div>
@@ -94,7 +92,7 @@ export default function ThongTinLienHePage() {
 
         {/* Contact Form Section */}
         <div className="bg-white rounded-lg p-8 shadow-md mb-12 border-l-4 border-blue-500">
-          <h2 className="text-3xl font-bold text-blue-900 mb-6">Gửi Pesan Cho Chúng Tôi</h2>
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Gửi kiến nghị cho chúng tôi</h2>
           <form className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>

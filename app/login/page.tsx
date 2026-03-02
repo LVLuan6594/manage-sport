@@ -25,9 +25,15 @@ export default function LoginPage() {
     setIsLoading(true)
 
     if (login(username, password)) {
-      router.push('/dashboard')
+      // route based on role
+      const u = JSON.parse(localStorage.getItem('auth') || '{}')
+      if (u.role === 'coach') {
+        router.push('/coach')
+      } else {
+        router.push('/dashboard')
+      }
     } else {
-      setError('Invalid username or password')
+      setError('Tài khoản hoặc Mật khẩu không đúng.Vui Lòng nhập lại!')
       setPassword('')
     }
 

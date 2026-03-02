@@ -1,7 +1,6 @@
 'use client'
 
 import React from "react"
-
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/app/auth-context'
@@ -9,7 +8,7 @@ import { Sidebar } from '@/components/sidebar'
 import { FloatingChatbotButton } from '@/components/floating-chatbot-button'
 import { Toaster } from '@/components/ui/toaster'
 
-export default function DashboardLayout({
+export default function CoachLayout({
   children,
 }: {
   children: React.ReactNode
@@ -23,9 +22,9 @@ export default function DashboardLayout({
       router.push('/login')
       return
     }
-    // only admin can stay on dashboard
-    if (isAuthenticated && user?.role !== 'admin') {
-      router.push('/coach')
+    // only coaches should be here
+    if (isAuthenticated && user?.role !== 'coach') {
+      router.push('/dashboard')
     }
   }, [isAuthenticated, isLoading, user, router])
 

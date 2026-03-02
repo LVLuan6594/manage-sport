@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/app/auth-context'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 interface Athlete {
   id: number
@@ -13,7 +14,7 @@ interface Athlete {
 }
 
 interface TrainingPlan {
-  id: string
+  id: string  
   title: string
   description: string
   athleteId: number
@@ -70,16 +71,57 @@ export default function CreateTrainingPlan() {
     e.preventDefault()
     setSubmitting(true)
 
+    // Validate required fields
+    if (!form.athleteId) {
+      alert('Vui lòng chọn vận động viên')
+      setSubmitting(false)
+      return
+    }
+
+    if (!form.title.trim()) {
+      alert('Vui lòng nhập tiêu đề kế hoạch')
+      setSubmitting(false)
+      return
+    }
+
+    if (!form.description.trim()) {
+      alert('Vui lòng nhập mô tả chi tiết')
+      setSubmitting(false)
+      return
+    }
+
+    if (!form.startDate) {
+      alert('Vui lòng chọn ngày bắt đầu')
+      setSubmitting(false)
+      return
+    }
+
+    if (!form.goals.trim()) {
+      alert('Vui lòng nhập mục tiêu luyện tập')
+      setSubmitting(false)
+      return
+    }
+
     try {
-      const athleteId = parseInt(form.athleteId)
+      const athleteId = parseInt(form.athleteId, 10)
+      if (isNaN(athleteId)) {
+        alert('ID vận động viên không hợp lệ')
+        setSubmitting(false)
+        return
+      }
+
       const athlete = athletes.find((a) => a.id === athleteId)
 
       const plan: TrainingPlan = {
         id: '',
-        ...form,
+        title: form.title.trim(),
+        description: form.description.trim(),
         athleteId: athleteId,
         athleteName: athlete?.name || '',
         sport: user?.sport || '',
+        startDate: form.startDate,
+        duration: parseInt(form.duration.toString(), 10),
+        goals: form.goals.trim(),
         createdAt: '',
       }
 
@@ -91,13 +133,14 @@ export default function CreateTrainingPlan() {
 
       if (res.ok) {
         alert('Tạo kế hoạch luyện tập thành công!')
-        router.push('/coach/training-plans')
+        router.push('/coach')
       } else {
-        alert('Lỗi khi tạo kế hoạch')
+        const error = await res.json()
+        alert('Lỗi khi tạo kế hoạch: ' + (error.error || 'Vui lòng thử lại'))
       }
     } catch (error) {
       console.error(error)
-      alert('Lỗi khi tạo kế hoạch')
+      alert('Lỗi khi tạo kế hoạch. Vui lòng thử lại sau')
     } finally {
       setSubmitting(false)
     }
@@ -107,13 +150,11 @@ export default function CreateTrainingPlan() {
     <main className="p-4 lg:p-8 bg-gradient-to-br from-slate-50 to-white min-h-screen">
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
-          <Button
-            onClick={() => router.back()}
-            variant="outline"
-            className="mb-4"
-          >
-            ← Quay Lại
-          </Button>
+          <Link href="/coach">
+            <Button variant="outline" className="mb-4">
+              ← Quay Lại Bảng Điều Khiển
+            </Button>
+          </Link>
           <h1 className="text-3xl font-bold text-blue-900">Tạo Kế Hoạch Luyện Tập Mới</h1>
           <p className="text-blue-600 mt-2">Môn: {user?.sport}</p>
         </div>
