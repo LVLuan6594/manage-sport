@@ -1,8 +1,31 @@
 'use client'
 
 import { MapPin, Phone, Mail, Facebook, MessageCircle } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { FooterSettings, getFooterSettings } from '@/lib/footer-settings'
 
 export function Footer() {
+  const [settings, setSettings] = useState<FooterSettings | null>(null)
+
+  useEffect(() => {
+    setSettings(getFooterSettings())
+
+    const handler = () => {
+      setSettings(getFooterSettings())
+    }
+    window.addEventListener('storage', handler)
+    window.addEventListener('footerChange', handler)
+    return () => {
+      window.removeEventListener('storage', handler)
+      window.removeEventListener('footerChange', handler)
+    }
+  }, [])
+
+  if (!settings) {
+    // while loading, render nothing or a simple placeholder
+    return null
+  }
+
   return (
     <footer className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4">
@@ -16,13 +39,13 @@ export function Footer() {
             </h3>
             <div className="space-y-2 text-blue-100 text-sm">
               <div>
-                <p className="text-base leading-snug">TRUNG TÂM HUẤN LUYỆN VÀ THI ĐẤU THỂ THAO TỈNH VĨNH LONG</p>
+                <p className="text-base leading-snug">{settings.orgName}</p>
               </div>
               <div className="flex gap-2">
                 <MapPin size={18} className="text-blue-300 flex-shrink-0 mt-0.5" />
                 <div className="min-w-0">
                   <p className="font-semibold text-white text-sm mb-0.5">Địa Chỉ</p>
-                  <p className="text-xs">79 Nguyễn Huệ, Phường Long Châu, Tỉnh Vĩnh Long</p>
+                  <p className="text-xs">{settings.address}</p>
                 </div>
               </div>
               <div className="flex gap-2">
@@ -31,7 +54,7 @@ export function Footer() {
                   <p className="font-semibold text-white text-xs mb-0.5">Điện thoại</p>
                   <p className="text-xs">
                     <a href="tel:02703862071" className="hover:text-blue-300 transition break-all">
-                      02703.862.071
+                      {settings.phone}
                     </a>
                   </p>
                 </div>
@@ -47,7 +70,7 @@ export function Footer() {
             </h3>
             <div className="space-y-2">
               <a
-                href="https://facebook.com"
+                href={settings.facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 p-2 bg-blue-800/50 hover:bg-blue-700/50 rounded-lg transition-all hover:translate-x-1"
@@ -60,7 +83,7 @@ export function Footer() {
               </a>
 
               <a
-                href="https://zalo.me"
+                href={settings.zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 p-2 bg-blue-800/50 hover:bg-blue-700/50 rounded-lg transition-all hover:translate-x-1"
@@ -73,7 +96,7 @@ export function Footer() {
               </a>
 
               <a
-                href="mailto:info@sports.vn"
+                href={`mailto:${settings.email}`}
                 className="flex items-center gap-2 p-2 bg-blue-800/50 hover:bg-blue-700/50 rounded-lg transition-all hover:translate-x-1"
               >
                 <Mail size={20} className="text-blue-300 flex-shrink-0" />
@@ -114,7 +137,7 @@ export function Footer() {
         {/* Bottom Footer */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-center sm:text-left text-blue-200 text-xs">
           <div>
-            <p className="leading-snug">© 2026 Trung Tâm Huấn Luyện và Thi Đấu Thể Thao Tỉnh Vĩnh Long. <br></br>All Rights Reserved.</p>
+              <p className="leading-snug">© {new Date().getFullYear()} {settings.orgName}. <br></br>All Rights Reserved.</p>
           </div>
           <div className="flex justify-center sm:justify-start gap-2 flex-wrap">
             <a href="#" className="hover:text-blue-300 transition">Chính Sách</a>
@@ -124,7 +147,7 @@ export function Footer() {
             <a href="#" className="hover:text-blue-300 transition">Liên Hệ</a>
           </div>
           <div className="sm:text-right">
-            <p className="leading-snug">Phiên bản: 1.0.0 | Cập nhật: {new Date().getFullYear()}</p>
+            <p className="leading-snug">Phiên bản: {settings.version} | Cập nhật: {new Date().getFullYear()}</p>
           </div>
         </div>
       </div>

@@ -7,11 +7,27 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Bell, Lock, User, Volume2 } from 'lucide-react'
+import { useEffect } from 'react'
+import {
+  FooterSettings,
+  getFooterSettings,
+  saveFooterSettings,
+} from '@/lib/footer-settings'
 
 export default function SettingsPage() {
   const [notifications, setNotifications] = useState(true)
   const [emailAlerts, setEmailAlerts] = useState(true)
   const [soundEnabled, setSoundEnabled] = useState(true)
+
+  // footer settings
+  const [footer, setFooter] = useState<FooterSettings>(getFooterSettings())
+
+  // persist footer settings whenever they change
+  useEffect(() => {
+    saveFooterSettings(footer)
+    // notify other components in same tab
+    window.dispatchEvent(new Event('footerChange'))
+  }, [footer])
 
   return (
     <main className="p-4 lg:p-8 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 min-h-screen">
@@ -182,6 +198,79 @@ export default function SettingsPage() {
                 <option>Âm Thanh</option>
                 <option>Kỹ Thuật Số</option>
               </select>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Footer Settings */}
+        <Card className="bg-gradient-to-br from-slate-800 to-slate-900 border-blue-500/30 mb-6">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <User className="text-blue-500" size={24} />
+              <div>
+                <CardTitle className="text-white">Chân Trang (Footer)</CardTitle>
+                <CardDescription className="text-slate-400">
+                  Thay đổi thông tin hiển thị ở chân trang
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="space-y-2">
+              <Label className="text-white">Tên Đơn Vị</Label>
+              <Input
+                value={footer.orgName}
+                onChange={(e) => setFooter({ ...footer, orgName: e.target.value })}
+                className="bg-slate-700/50 border-slate-600 text-white"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-white">Địa Chỉ</Label>
+              <Input
+                value={footer.address}
+                onChange={(e) => setFooter({ ...footer, address: e.target.value })}
+                className="bg-slate-700/50 border-slate-600 text-white"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-white">Điện Thoại</Label>
+              <Input
+                value={footer.phone}
+                onChange={(e) => setFooter({ ...footer, phone: e.target.value })}
+                className="bg-slate-700/50 border-slate-600 text-white"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-white">Email</Label>
+              <Input
+                value={footer.email}
+                onChange={(e) => setFooter({ ...footer, email: e.target.value })}
+                className="bg-slate-700/50 border-slate-600 text-white"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-white">URL Facebook</Label>
+              <Input
+                value={footer.facebookUrl}
+                onChange={(e) => setFooter({ ...footer, facebookUrl: e.target.value })}
+                className="bg-slate-700/50 border-slate-600 text-white"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-white">URL Zalo</Label>
+              <Input
+                value={footer.zaloUrl}
+                onChange={(e) => setFooter({ ...footer, zaloUrl: e.target.value })}
+                className="bg-slate-700/50 border-slate-600 text-white"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-white">Phiên bản</Label>
+              <Input
+                value={footer.version}
+                onChange={(e) => setFooter({ ...footer, version: e.target.value })}
+                className="bg-slate-700/50 border-slate-600 text-white"
+              />
             </div>
           </CardContent>
         </Card>

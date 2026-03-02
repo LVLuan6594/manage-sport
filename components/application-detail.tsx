@@ -158,81 +158,81 @@ export default function ApplicationDetail() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <section>
-            <h3 className="font-semibold text-blue-900 mb-2">Thông tin cá nhân</h3>
+            <h3 className="font-bold text-blue-900 mb-2">Thông tin cá nhân</h3>
             <dl className="space-y-2 text-sm text-gray-800">
               <div>
-                <dt className="font-medium">Ngày sinh</dt>
+                <dt className="font-bold">Ngày sinh</dt>
                 <dd>{app.dob || '-'}</dd>
               </div>
               <div>
-                <dt className="font-medium">Giới tính</dt>
+                <dt className="font-bold">Giới tính</dt>
                 <dd>{app.gender || '-'}</dd>
               </div>
               <div>
-                <dt className="font-medium">CCCD/CMND</dt>
+                <dt className="font-bold">CCCD/CMND</dt>
                 <dd>{app.idNumber || '-'}</dd>
               </div>
               <div>
-                <dt className="font-medium">Địa chỉ</dt>
+                <dt className="font-bold">Địa chỉ</dt>
                 <dd>{app.address || '-'}</dd>
               </div>
               <div>
-                <dt className="font-medium">Số điện thoại</dt>
+                <dt className="font-bold">Số điện thoại</dt>
                 <dd>{app.phone || '-'}</dd>
               </div>
               <div>
-                <dt className="font-medium">Email</dt>
+                <dt className="font-bold">Email</dt>
                 <dd>{app.email || '-'}</dd>
               </div>
               <div>
-                <dt className="font-medium">Trường/Đơn vị</dt>
+                <dt className="font-bold">Trường/Đơn vị</dt>
                 <dd>{app.school || '-'}</dd>
               </div>
             </dl>
           </section>
 
           <section>
-            <h3 className="font-semibold text-blue-900 mb-2">Thông tin tuyển sinh</h3>
+            <h3 className="font-bold text-blue-900 mb-2">Thông tin tuyển sinh</h3>
             <dl className="space-y-2 text-sm text-gray-800">
               <div>
-                <dt className="font-medium">Bộ môn</dt>
+                <dt className="font-bold">Bộ môn</dt>
                 <dd>{app.sport || '-'}</dd>
               </div>
               <div>
-                <dt className="font-medium">Hình thức đăng ký</dt>
+                <dt className="font-bold">Hình thức đăng ký</dt>
                 <dd>{app.registerType || '-'}</dd>
               </div>
               <div>
-                <dt className="font-medium">Thời gian mong muốn</dt>
+                <dt className="font-bold">Thời gian mong muốn</dt>
                 <dd>{app.trainingTime || '-'}</dd>
               </div>
               <div>
-                <dt className="font-medium">Chiều cao</dt>
+                <dt className="font-bold">Chiều cao</dt>
                 <dd>{app.height || '-'} cm</dd>
               </div>
               <div>
-                <dt className="font-medium">Cân nặng</dt>
+                <dt className="font-bold">Cân nặng</dt>
                 <dd>{app.weight || '-'} kg</dd>
               </div>
             </dl>
 
-            <h3 className="font-semibold text-blue-900 mt-4 mb-2">Mô tả bổ sung</h3>
+            <h3 className="font-bold text-blue-900 mt-4 mb-2">Mô tả bổ sung</h3>
             <dl className="space-y-2 text-sm text-gray-800">
               <div>
-                <dt className="font-medium">Thành tích</dt>
+                <dt className="font-bold">Thành tích</dt>
                 <dd>{app.achievements || '-'}</dd>
               </div>
               <div>
-                <dt className="font-medium">Kinh nghiệm</dt>
+                <dt className="font-bold">Kinh nghiệm</dt>
                 <dd>{app.experience || '-'}</dd>
               </div>
               <div>
-                <dt className="font-medium">Năng khiếu</dt>
+                <dt className="font-bold">Năng khiếu</dt>
                 <dd>{app.talent || '-'}</dd>
               </div>
             </dl>
 
-            <h3 className="font-semibold text-blue-900 mt-4 mb-2">Hồ sơ đính kèm</h3>
+            <h3 className="font-bold text-blue-900 mt-4 mb-2">Hồ sơ đính kèm</h3>
             <ul className="text-sm text-gray-800 space-y-1">
               <li>
                 Avatar: {app.avatarName || 'Không có'}

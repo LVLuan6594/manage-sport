@@ -132,12 +132,12 @@ export default function CoachesPage() {
 
             const headers = lines[0].split(',').map((h: string) => h.trim())
             const nameIndex = headers.findIndex(h => h.toLowerCase().includes('tên') || h.toLowerCase().includes('name'))
-            const specialtyIndex = headers.findIndex(h => h.toLowerCase().includes('chuyên') || h.toLowerCase().includes('special') || h.toLowerCase().includes('specialty'))
-            const experienceIndex = headers.findIndex(h => h.toLowerCase().includes('kinh') || h.toLowerCase().includes('experience') || h.toLowerCase().includes('years'))
+            const specialtyIndex = headers.findIndex(h => h.toLowerCase().includes('môn') || h.toLowerCase().includes('chuyên') || h.toLowerCase().includes('sport') || h.toLowerCase().includes('specialty'))
+            const efficiencyIndex = headers.findIndex(h => h.toLowerCase().includes('hiệu') || h.toLowerCase().includes('eff') || h.toLowerCase().includes('efficiency') || h.toLowerCase().includes('performance'))
+            const coachIndex = headers.findIndex(h => h.toLowerCase().includes('huấn') || h.toLowerCase().includes('coach'))
+            const experienceIndex = headers.findIndex(h => h.toLowerCase().includes('năm') || h.toLowerCase().includes('kinh') || h.toLowerCase().includes('experience') || h.toLowerCase().includes('years'))
             const certificationIndex = headers.findIndex(h => h.toLowerCase().includes('chứng') || h.toLowerCase().includes('cert'))
             const emailIndex = headers.findIndex(h => h.toLowerCase().includes('email'))
-            const athletesIndex = headers.findIndex(h => h.toLowerCase().includes('vận') || h.toLowerCase().includes('athlete'))
-            const efficiencyIndex = headers.findIndex(h => h.toLowerCase().includes('eff') || h.toLowerCase().includes('efficiency'))
 
             if (nameIndex === -1) {
               alert('File phải có cột "Tên"')
@@ -147,14 +147,14 @@ export default function CoachesPage() {
             const newCoaches: Coach[] = []
             for (let i = 1; i < lines.length; i++) {
               const values = lines[i].split(',').map((v: string) => v.trim())
+              if (!values[nameIndex] || !values[nameIndex].trim()) continue
+              
               const coach: Coach = {
-                name: values[nameIndex] || '',
-                specialty: specialtyIndex !== -1 ? values[specialtyIndex] || '' : '',
-                experience: parseInt(values[experienceIndex] || '0') || 0,
-                certification: certificationIndex !== -1 ? values[certificationIndex] || '' : undefined,
-                email: emailIndex !== -1 ? values[emailIndex] || '' : undefined,
-                athletesManaged: athletesIndex !== -1 ? parseInt(values[athletesIndex] || '0') || 0 : undefined,
-                efficiency: efficiencyIndex !== -1 ? parseFloat(values[efficiencyIndex] || '0') || undefined : undefined,
+                name: values[nameIndex]?.trim() || '',
+                specialty: values[specialtyIndex]?.trim() || '',
+                experience: parseInt(values[experienceIndex]?.trim()) || 0,
+                certification: values[certificationIndex]?.trim() || undefined,
+                email: values[emailIndex]?.trim() || undefined,
               }
 
               if (coach.name) {
@@ -185,12 +185,12 @@ export default function CoachesPage() {
 
                 const headers = Object.keys(jsonData[0] || {})
                 const nameIndex = headers.findIndex((h: string) => h.toLowerCase().includes('tên') || h.toLowerCase().includes('name'))
-                const specialtyIndex = headers.findIndex((h: string) => h.toLowerCase().includes('chuyên') || h.toLowerCase().includes('special') || h.toLowerCase().includes('specialty'))
-                const experienceIndex = headers.findIndex((h: string) => h.toLowerCase().includes('kinh') || h.toLowerCase().includes('experience') || h.toLowerCase().includes('years'))
+                const specialtyIndex = headers.findIndex((h: string) => h.toLowerCase().includes('môn') || h.toLowerCase().includes('chuyên') || h.toLowerCase().includes('sport') || h.toLowerCase().includes('specialty'))
+                const efficiencyIndex = headers.findIndex((h: string) => h.toLowerCase().includes('hiệu') || h.toLowerCase().includes('eff') || h.toLowerCase().includes('efficiency') || h.toLowerCase().includes('performance'))
+                const coachIndex = headers.findIndex((h: string) => h.toLowerCase().includes('huấn') || h.toLowerCase().includes('coach'))
+                const experienceIndex = headers.findIndex((h: string) => h.toLowerCase().includes('năm') || h.toLowerCase().includes('kinh') || h.toLowerCase().includes('experience') || h.toLowerCase().includes('years'))
                 const certificationIndex = headers.findIndex((h: string) => h.toLowerCase().includes('chứng') || h.toLowerCase().includes('cert'))
                 const emailIndex = headers.findIndex((h: string) => h.toLowerCase().includes('email'))
-                const athletesIndex = headers.findIndex((h: string) => h.toLowerCase().includes('vận') || h.toLowerCase().includes('athlete'))
-                const efficiencyIndex = headers.findIndex((h: string) => h.toLowerCase().includes('eff') || h.toLowerCase().includes('efficiency'))
 
                 if (nameIndex === -1) {
                   alert('File phải có cột "Tên"')
@@ -199,15 +199,15 @@ export default function CoachesPage() {
 
                 let addedCount = 0
                 for (const row of jsonData) {
-                  const values = Object.values(row)
+                  const values = Object.values(row) as string[]
+                  if (!values[nameIndex] || !String(values[nameIndex]).trim()) continue
+                  
                   const coach: Coach = {
-                    name: String(values[nameIndex] || '') || '',
-                    specialty: specialtyIndex !== -1 ? String(values[specialtyIndex] || '') : '',
+                    name: String(values[nameIndex])?.trim() || '',
+                    specialty: String(values[specialtyIndex])?.trim() || '',
                     experience: parseInt(String(values[experienceIndex] || 0)) || 0,
-                    certification: certificationIndex !== -1 ? String(values[certificationIndex] || '') : undefined,
-                    email: emailIndex !== -1 ? String(values[emailIndex] || '') : undefined,
-                    athletesManaged: athletesIndex !== -1 ? parseInt(String(values[athletesIndex] || 0)) || undefined : undefined,
-                    efficiency: efficiencyIndex !== -1 ? parseFloat(String(values[efficiencyIndex] || 0)) || undefined : undefined,
+                    certification: String(values[certificationIndex])?.trim() || undefined,
+                    email: String(values[emailIndex])?.trim() || undefined,
                   }
 
                   if (coach.name) {

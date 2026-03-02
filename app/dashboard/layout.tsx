@@ -8,6 +8,7 @@ import { useAuth } from '@/app/auth-context'
 import { Sidebar } from '@/components/sidebar'
 import { FloatingChatbotButton } from '@/components/floating-chatbot-button'
 import { Toaster } from '@/components/ui/toaster'
+import UserMenu from '@/components/user-menu'
 
 export default function DashboardLayout({
   children,
@@ -15,13 +16,14 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   const router = useRouter()
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, isLoading } = useAuth()
 
   useEffect(() => {
+    if (isLoading) return // wait for auth to initialize
     if (!isAuthenticated) {
       router.push('/login')
     }
-  }, [isAuthenticated, router])
+  }, [isAuthenticated, isLoading, router])
 
   if (!isAuthenticated) return null
 
@@ -29,6 +31,7 @@ export default function DashboardLayout({
     <div className="flex h-screen bg-white">
       <Sidebar />
       <div className="flex-1 overflow-auto bg-gradient-to-br from-slate-50 to-white">{children}</div>
+      <UserMenu />
       <Toaster />
       <FloatingChatbotButton />
     </div>

@@ -3,8 +3,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts'
-import { Users, Dumbbell, TrendingUp, Award } from 'lucide-react'
+import { Users, Dumbbell, TrendingUp, Award, Heart, Calendar } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 interface Athlete {
   id: number
@@ -47,10 +48,28 @@ const athleteProgressData = [
   { week: 'W4', strength: 82, speed: 62, endurance: 85 },
 ]
 
+// Mock data for health status
+// health status will be computed from athletes list
+
+// Mock data for upcoming events
+const upcomingEvents = [
+  { id: 1, name: 'Giải Bơi Lội Quốc Gia', date: '15/03/2026', location: 'Tp.HCM', sport: '🏊' },
+  { id: 2, name: 'Vòng Loại Cầu Lông', date: '20/03/2026', location: 'Hà Nội', sport: '🏸' },
+  { id: 3, name: 'Giải Điền Kinh Vùng', date: '25/03/2026', location: 'Đà Nẵng', sport: '🏃' },
+]
+
+// Filter teams for performance chart
+const filterTeams = [
+  { label: 'Tất cả', value: 'all' },
+  { label: 'Đội tuyển A', value: 'team_a' },
+  { label: 'Đội tuyển B', value: 'team_b' },
+]
+
 export default function DashboardPage() {
   const [athletes, setAthletes] = useState<Athlete[]>([])
   const [coaches, setCoaches] = useState<Coach[]>([])
   const [loading, setLoading] = useState(true)
+  const [selectedTeam, setSelectedTeam] = useState('all')
 
   useEffect(() => {
     async function fetchData() {
@@ -76,6 +95,16 @@ export default function DashboardPage() {
   const totalCoaches = coaches.length
   const qualifiedAthletes = athletes.filter((a) => a.qualified).length
   const totalMedals = athletes.reduce((sum, a) => sum + (a.medals?.gold || 0) + (a.medals?.silver || 0) + (a.medals?.bronze || 0), 0)
+
+  // compute health statuses dynamically
+  const readyCount = athletes.filter((a) => !a.injured && !a.potential).length
+  const recoveringCount = athletes.filter((a) => a.potential && !a.injured).length
+  const injuredCount = athletes.filter((a) => a.injured).length
+  const healthStatusData = [
+    { status: 'Sẵn sàng', count: readyCount, color: '#10b981' },
+    { status: 'Đang phục hồi', count: recoveringCount, color: '#f59e0b' },
+    { status: 'Chấn thương', count: injuredCount, color: '#ef4444' },
+  ]
 
   return (
     <main className="p-4 lg:p-8 bg-gradient-to-br from-slate-50 to-white min-h-screen">
@@ -149,11 +178,65 @@ export default function DashboardPage() {
               <Award className="h-4 w-4 text-blue-700" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-blue-900">{loading ? '...' : totalMedals}</div>
-              <p className="text-xs text-blue-600 mt-1">Tính từ tất cả vận động viên</p>
+              <div className="text-3xl font-bold text-blue-900 mb-4">{loading ? '...' : totalMedals}</div>
+              <div className="grid grid-cols-3 gap-3 text-center">
+                <div className="bg-yellow-100 rounded-lg p-2">
+                  <div className="text-sm font-bold text-yellow-700">12</div>
+                  <div className="text-xs text-yellow-600">🥇 Vàng</div>
+                </div>
+                <div className="bg-gray-100 rounded-lg p-2">
+                  <div className="text-sm font-bold text-gray-700">15</div>
+                  <div className="text-xs text-gray-600">🥈 Bạc</div>
+                </div>
+                <div className="bg-orange-100 rounded-lg p-2">
+                  <div className="text-sm font-bold text-orange-700">15</div>
+                  <div className="text-xs text-orange-600">🥉 Đồng</div>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
+
+        {/* Health Status Widget */}
+        <Card className="bg-gradient-to-br from-white to-slate-50 border-blue-300 shadow-md mb-8 backdrop-blur-sm">
+          <CardHeader>
+            <div className="flex items-center gap-3">
+              <Heart className="h-5 w-5 text-red-500" />
+              <CardTitle className="text-blue-900">Trạng Thái Sức Khỏe Vận Động Viên</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {healthStatusData.map((item, i) => (
+                <div key={i} className="flex flex-col items-center gap-3">
+                  <div className="relative w-24 h-24 rounded-full flex items-center justify-center border-4" style={{ borderColor: item.color, backgroundColor: `${item.color}15` }}>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-blue-900">{item.count}</div>
+                      <div className="text-xs text-blue-600">người</div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-semibold text-blue-900">{item.status}</p>
+                    <div className="w-3 h-3 rounded-full mx-auto mt-1" style={{ backgroundColor: item.color }}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 pt-6 border-t border-slate-200">
+              <div className="flex justify-between items-center">
+                <div className="text-sm text-slate-600">Tổng cộng: <span className="font-bold text-blue-900">{readyCount+recoveringCount+injuredCount} vận động viên</span></div>
+                <div className="flex gap-2">
+                  {healthStatusData.map((item, i) => (
+                    <div key={i} className="flex items-center gap-1">
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }}></div>
+                      <span className="text-xs text-slate-600">{item.status}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card className="bg-gradient-to-br from-white to-slate-50 border-blue-300 shadow-sm">
@@ -183,8 +266,20 @@ export default function DashboardPage() {
           </Card>
 
           <Card className="bg-gradient-to-br from-white to-slate-50 border-blue-300 shadow-sm">
-            <CardHeader>
+            <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-blue-900">Hiệu Suất Vận Động Viên</CardTitle>
+              <Select value={selectedTeam} onValueChange={setSelectedTeam}>
+                <SelectTrigger className="w-40 bg-white border-blue-300">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {filterTeams.map((team) => (
+                    <SelectItem key={team.value} value={team.value}>
+                      {team.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -206,36 +301,76 @@ export default function DashboardPage() {
                   <Line type="monotone" dataKey="endurance" stroke="#10b981" strokeWidth={2} />
                 </LineChart>
               </ResponsiveContainer>
+              <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200 text-xs text-blue-700">
+                <p className="font-semibold">Filter: {filterTeams.find(t => t.value === selectedTeam)?.label}</p>
+                <p className="mt-1">Đang hiển thị dữ liệu hiệu suất theo {filterTeams.find(t => t.value === selectedTeam)?.label.toLowerCase()}</p>
+              </div>
             </CardContent>
           </Card>
         </div>
 
-        <Card className="bg-gradient-to-br from-white to-slate-50 border-blue-300 shadow-sm mt-6">
-          <CardHeader>
-            <CardTitle className="text-blue-900">Hoạt Động Gần Đây</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {[
-                { name: 'John Smith', action: 'Hoàn thành buổi tập luyện', time: '2 giờ trước' },
-                { name: 'Sarah Johnson', action: 'Đạt kỷ lục cá nhân mới', time: '4 giờ trước' },
-                { name: 'Mike Davis', action: 'Tham dự buổi coaching', time: '6 giờ trước' },
-                { name: 'Emma Wilson', action: 'Bắt đầu chương trình mới', time: '1 ngày trước' },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between pb-4 border-b border-slate-700/50 last:border-0"
-                >
-                  <div>
-                    <p className="font-semibold text-white">{item.name}</p>
-                    <p className="text-sm text-slate-400">{item.action}</p>
+        {/* Recent Activity & Upcoming Events */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          <Card className="bg-gradient-to-br from-white to-slate-50 border-blue-300 shadow-md backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="text-blue-900">Hoạt Động Gần Đây</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {[
+                  { name: 'John Smith', action: 'Hoàn thành buổi tập luyện', time: '2 giờ trước' },
+                  { name: 'Sarah Johnson', action: 'Đạt kỷ lục cá nhân mới', time: '4 giờ trước' },
+                  { name: 'Mike Davis', action: 'Tham dự buổi coaching', time: '6 giờ trước' },
+                  { name: 'Emma Wilson', action: 'Bắt đầu chương trình mới', time: '1 ngày trước' },
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center justify-between pb-4 border-b border-slate-200 last:border-0 hover:bg-blue-50 p-2 rounded transition-colors"
+                  >
+                    <div>
+                      <p className="font-semibold text-blue-900">{item.name}</p>
+                      <p className="text-sm text-slate-600">{item.action}</p>
+                    </div>
+                    <p className="text-xs text-slate-500">{item.time}</p>
                   </div>
-                  <p className="text-xs text-slate-500">{item.time}</p>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-white to-slate-50 border-green-300 shadow-md backdrop-blur-sm">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <Calendar className="h-5 w-5 text-green-500" />
+                <CardTitle className="text-blue-900">Sự Kiện Sắp Tới</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {upcomingEvents.map((event) => (
+                  <div
+                    key={event.id}
+                    className="border-l-4 border-green-500 bg-green-50 p-4 rounded-r-lg hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <p className="font-semibold text-blue-900 flex items-center gap-2">
+                          <span>{event.sport}</span>
+                          {event.name}
+                        </p>
+                        <p className="text-sm text-slate-600 mt-1">📅 {event.date}</p>
+                        <p className="text-sm text-slate-600">📍 {event.location}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 p-3 bg-green-100 rounded-lg border border-green-300 text-xs text-green-700">
+                <p>ℹ️ Có {upcomingEvents.length} sự kiện trong tháng tới</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </main>
   )
