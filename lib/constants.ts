@@ -35,7 +35,6 @@ export const MEDAL_TYPES = {
 export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
-  GUEST_LOGIN: '/guest-login',
   DASHBOARD: '/dashboard',
   DASHBOARD_ATHLETES: '/dashboard/athletes',
   DASHBOARD_COACHES: '/dashboard/coaches',
