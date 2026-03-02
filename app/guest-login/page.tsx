@@ -3,12 +3,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function GuestLoginPage() {
-  const [mode, setMode] = useState<"login" | "register">("login");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
   const router = useRouter();
+  // guest login removed, redirect to application page
+  useEffect(() => {
+    router.push('/xet-tuyen');
+  }, [router]);
+
+  return null;
 
   const validatePhone = (value: string) => /^\d{10}$/.test(value);
   const validatePassword = (value: string) => value.length >= 8;

@@ -8,6 +8,7 @@ interface AuthContextType {
   login: (username: string, password: string) => boolean
   logout: () => void
   isLoading: boolean
+  resetPassword: (username: string) => string | null
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -17,7 +18,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<{ username: string } | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
+  // users store: username -> { password, role, sport? }
+  const initializeUsers = () => {
+    const stored = localStorage.getItem('users')
+    if (!stored) {
+      const defaults = {
+        admin: { password: 'admin@123', role: 'admin' },
+        coach_boxing: { password: 'coach@123', role: 'coach', sport: '🥊 Võ thuật' },
+        coach_swimming: { password: 'coach@123', role: 'coach', sport: '🏊 Bơi lội' },
+      }
+      localStorage.setItem('users', JSON.stringify(defaults))
+      return defaults
+    }
+    try {
+      return JSON.parse(stored)
+    } catch {
+      return {}
+    }
+  }
+
   useEffect(() => {
+    initializeUsers()
     const savedAuth = localStorage.getItem('auth')
     if (savedAuth) {
       const { username, role, sport } = JSON.parse(savedAuth)
@@ -28,24 +49,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const login = (username: string, password: string) => {
-    // Admin login
-    if (username === 'admin' && password === 'admin@123') {
+    const users: Record<string, any> = initializeUsers()
+    const record = users[username]
+    if (record && record.password === password) {
       setIsAuthenticated(true)
-      setUser({ username, role: 'admin' })
-      localStorage.setItem('auth', JSON.stringify({ username, role: 'admin' }))
-      return true
-    }
-    // Coach logins
-    if (username === 'coach_boxing' && password === 'coach@123') {
-      setIsAuthenticated(true)
-      setUser({ username, role: 'coach', sport: '🥊 Võ thuật' })
-      localStorage.setItem('auth', JSON.stringify({ username, role: 'coach', sport: '🥊 Võ thuật' }))
-      return true
-    }
-    if (username === 'coach_swimming' && password === 'coach@123') {
-      setIsAuthenticated(true)
-      setUser({ username, role: 'coach', sport: '🏊 Bơi lội' })
-      localStorage.setItem('auth', JSON.stringify({ username, role: 'coach', sport: '🏊 Bơi lội' }))
+      const { role, sport } = record
+      setUser({ username, role, sport })
+      localStorage.setItem('auth', JSON.stringify({ username, role, sport }))
       return true
     }
     return false
@@ -57,8 +67,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('auth')
   }
 
+  const resetPassword = (username: string) => {
+    const users: Record<string, any> = initializeUsers()
+    if (!users[username]) return null
+    // generate simple random password
+    const newPass = Math.random().toString(36).slice(-8)
+    users[username].password = newPass
+    localStorage.setItem('users', JSON.stringify(users))
+    return newPass
+  }
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, isLoading, resetPassword }}>
       {children}
     </AuthContext.Provider>
   )

@@ -50,17 +50,12 @@ const mockRecruitmentInfo = {
 
 export default function XetTuyenPage() {
   const router = useRouter();
-  const [phone, setPhone] = useState<string | null>(null);
   const [selectedSport, setSelectedSport] = useState<null | { label: string; description: string }>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [sportsList, setSportsList] = useState(mockRecruitmentInfo.sports);
 
-  useEffect(() => {
-    setPhone(localStorage.getItem("guest_phone"));
-    if (!localStorage.getItem("guest_phone")) {
-      router.push("/guest-login");
-    }
-  }, [router]);
+  // guest-phone logic removed; users can submit application directly
+
 
   useEffect(() => {
     let mounted = true;
