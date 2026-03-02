@@ -13,6 +13,7 @@ const adminNavItems = [
   { href: '/dashboard/athletes', label: 'Vận Động Viên', icon: Dumbbell },
   { href: '/dashboard/coaches', label: 'Huấn Luyện Viên', icon: Whistle },
   { href: '/dashboard/users', label: 'Quản lý tài khoản', icon: Users },
+  { href: '/dashboard/settings', label: 'Cài đặt hệ thống', icon: Settings },
 ];
 
 const coachNavItems = [
