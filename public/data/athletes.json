@@ -21,9 +21,9 @@
   },
   {
     "id": 2,
-    "name": "Nguyễn Thanh Nhàn",
-    "sport": "🏊 Bơi lội",
-    "performance": 95,
+    "name": "Lê Vũ Luân",
+    "sport": "🥊 Võ thuật",
+    "performance": 81,
     "qualified": true,
     "joinMonth": "Tháng 3",
     "joinYear": 2022,
@@ -36,8 +36,8 @@
     "potential": true,
     "age": 21,
     "height": 165,
-    "coach": "Phạm Quốc Dũng",
-    "joinDate": "2026-02-03"
+    "coach": "Lê Vũ Luân",
+    "joinDate": "2026-03-02"
   },
   {
     "id": 3,
@@ -343,145 +343,5 @@
     "age": 26,
     "height": 171,
     "coach": "Trần Quốc Cường"
-  },
-  {
-    "id": 19,
-    "name": "TEST 1",
-    "sport": "Điền kinh",
-    "performance": 85,
-    "coach": "Nguyễn Văn 1",
-    "medals": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
-    },
-    "injured": false,
-    "potential": true
-  },
-  {
-    "id": 20,
-    "name": "TEST 2",
-    "sport": "🏊 Bơi lội",
-    "performance": 86,
-    "coach": "Nguyễn Văn 2",
-    "medals": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
-    },
-    "injured": false,
-    "potential": true
-  },
-  {
-    "id": 21,
-    "name": "TEST 3",
-    "sport": "Bóng chuyền",
-    "performance": 87,
-    "coach": "Nguyễn Văn 3",
-    "medals": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
-    },
-    "injured": false,
-    "potential": true
-  },
-  {
-    "id": 22,
-    "name": "TEST 4",
-    "sport": "Bóng bàn",
-    "performance": 88,
-    "coach": "Nguyễn Văn 4",
-    "medals": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
-    },
-    "injured": false,
-    "potential": true
-  },
-  {
-    "id": 23,
-    "name": "TEST 5",
-    "sport": "🏊 Bơi lội",
-    "performance": 89,
-    "coach": "Nguyễn Văn 5",
-    "medals": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
-    },
-    "injured": false,
-    "potential": true
-  },
-  {
-    "id": 24,
-    "name": "TEST 6",
-    "sport": "Cầu lông",
-    "performance": 90,
-    "coach": "Nguyễn Văn 6",
-    "medals": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
-    },
-    "injured": false,
-    "potential": true
-  },
-  {
-    "id": 25,
-    "name": "TEST 7",
-    "sport": "Tenis",
-    "performance": 91,
-    "coach": "Nguyễn Văn 7",
-    "medals": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
-    },
-    "injured": false,
-    "potential": true
-  },
-  {
-    "id": 26,
-    "name": "TEST 8",
-    "sport": "🏊 Bơi lội",
-    "performance": 92,
-    "coach": "Nguyễn Văn 8",
-    "medals": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
-    },
-    "injured": false,
-    "potential": true
-  },
-  {
-    "id": 27,
-    "name": "TEST 9",
-    "sport": "Cầu lông",
-    "performance": 93,
-    "coach": "Nguyễn Văn 9",
-    "medals": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
-    },
-    "injured": false,
-    "potential": true
-  },
-  {
-    "id": 28,
-    "name": "TEST 10",
-    "sport": "Tenis",
-    "performance": 94,
-    "coach": "Nguyễn Văn 10",
-    "medals": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
-    },
-    "injured": false,
-    "potential": true
   }
 ]

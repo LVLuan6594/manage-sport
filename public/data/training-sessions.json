@@ -1,11 +1,53 @@
 [
   {
+    "id": "1772462661880",
+    "createdAt": "2026-03-02T14:44:21.880Z",
+    "athleteId": 2,
+    "athleteName": "Lê Vũ Luân",
+    "sport": "🥊 Võ thuật",
+    "coachUsername": "coach_boxing",
+    "sessionDate": "2026-03-02",
+    "metrics": {
+      "duration": "90",
+      "warmup": "15",
+      "technique_level": "Tốt",
+      "punch_accuracy": "95",
+      "kick_accuracy": "98",
+      "defense_skill": "Tốt",
+      "endurance": "Tốt",
+      "speed_execution": "90",
+      "sparring_rounds": "3",
+      "notes": "Có thể thi đấu đội tỉnh trong tháng sau nếu giữ phong độ này"
+    }
+  },
+  {
+    "id": "1772460852357",
+    "createdAt": "2026-03-02T14:14:12.357Z",
+    "athleteId": 1,
+    "athleteName": "Phạm Văn Linh",
+    "sport": "🥊 Võ thuật",
+    "coachUsername": "coach_boxing",
+    "sessionDate": "2026-03-02",
+    "metrics": {
+      "duration": "60",
+      "warmup": "10",
+      "technique_level": "Tốt",
+      "punch_accuracy": "75",
+      "kick_accuracy": "76",
+      "defense_skill": "Tốt",
+      "endurance": "Tốt",
+      "speed_execution": "50",
+      "sparring_rounds": "2",
+      "notes": "Có cố gắng, cần phát huy thêm tốc độ ra đòn đá."
+    }
+  },
+  {
     "id": "1772435594260",
     "createdAt": "2026-03-02T07:13:14.260Z",
     "athleteId": 2,
     "athleteName": "Nguyễn Thanh Nhàn",
     "sport": "🏊 Bơi lội",
-    "coachUsername": "coach_swimming",
+    "coachUsername": "coach_boxing",
     "sessionDate": "2026-03-02",
     "metrics": {
       "duration": "23",
@@ -23,25 +65,5 @@
       "recovery_sets": "2",
       "notes": "cần luyện tập thêm"
     }
-  },
-  {
-    "id": "1772435033145",
-    "createdAt": "2026-03-02T07:03:53.145Z",
-    "athleteId": 2,
-    "athleteName": "Nguyễn Thanh Nhàn",
-    "sport": "🏊 Bơi lội",
-    "coachUsername": "coach_swimming",
-    "sessionDate": "2026-03-02",
-    "metrics": {}
-  },
-  {
-    "id": "1770173149344",
-    "createdAt": "2026-02-04T02:45:49.344Z",
-    "athleteId": 2,
-    "athleteName": "Nguyễn Thanh Nhàn",
-    "sport": "🏊 Bơi lội",
-    "coachUsername": "coach_swimming",
-    "sessionDate": "2026-02-04",
-    "metrics": {}
   }
 ]
